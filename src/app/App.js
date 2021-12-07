@@ -1,5 +1,3 @@
 export const App = ({ options }) => {
-    console.log('test');
-}
-
-
+  console.log('test');
+};
