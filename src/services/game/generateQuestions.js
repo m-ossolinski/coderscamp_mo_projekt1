@@ -4,6 +4,8 @@ const getRandomNumber = (minInt, maxInt) => {
   return Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
 };
 
+// zamienic te funkcje na pobieranie z api
+
 const getRangeOfIds = (mode) => {
   const modeLC = mode.toLowerCase();
   if (modeLC === 'people') {
@@ -24,6 +26,8 @@ const getRangeOfIds = (mode) => {
     return arr;
   } else return;
 };
+
+//
 
 const getAnswerNumbers = (arrOfNumbers) => {
   const minIndex = 0;

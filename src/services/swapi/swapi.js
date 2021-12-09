@@ -1,34 +1,43 @@
 const swapiEnv = process.env.SW_API_BASE_URL;
 
-export const fetchNameFromAPI = (mode, index) => {
-  const url = `${swapiEnv}/${mode}/${index}`;
+/*export const fetchIdsFromAPI = async (gameMode) => {
+  const url = `${swapiEnv}/${gameMode}`;
 
-  return fetch(url)
-    .then((resp) => {
-      if (resp.ok) {
-        return resp.json();
-      }
+  try {
+    const response = await fetch(url);
+    const results = await response.json();
 
-      throw Error(resp.statusText);
-    })
-    .then((resp) => {
-      const name = resp.name;
-      return name;
-    })
-    .catch((error) => {
-      throw Error(error);
-    });
+    console.log(results);
+  } catch (err) {
+    console.log(err);
+    throw (err);
+  }
+};*/
+
+export const fetchNameFromAPI = async (gameMode, index) => {
+  const url = `${swapiEnv}/${gameMode}/${index}`;
+
+  try {
+    const response = await fetch(url);
+    const results = await response.json();
+
+    const name = results.name;
+    return name;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
 
-export const fetchImgFromAPI = (mode, index) => {
-  const url = `../../static/assets/img/modes/${mode}/${index}.jpg`;
+export const fetchImgFromAPI = async (gameMode, index) => {
+  const url = `../../static/assets/img/modes/${gameMode}/${index}.jpg`;
 
-  return fetch(url)
-    .then((resp) => {
-      const stringUrl = resp.url;
-      return stringUrl;
-    })
-    .catch((error) => {
-      throw Error(error);
-    });
+  try {
+    const response = await fetch(url, { responseType: 'blob' });
+    const stringUrl = response.url;
+    return stringUrl;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
