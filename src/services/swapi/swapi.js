@@ -1,6 +1,10 @@
 const swapiEnv = process.env.SW_API_BASE_URL;
 
-/*export const fetchIdsFromAPI = async (gameMode) => {
+/*
+
+// real API fetch function
+
+export const fetchIdsFromAPI = async (gameMode) => {
   const url = `${swapiEnv}/${gameMode}`;
 
   try {
@@ -10,9 +14,26 @@ const swapiEnv = process.env.SW_API_BASE_URL;
     console.log(results);
   } catch (err) {
     console.log(err);
-    throw (err);
+    throw err;
   }
 };*/
+
+export const fetchIdsFromAPI = async (gameMode) => {
+  const url = `http://localhost:3000/${gameMode}`;
+
+  try {
+    const response = await fetch(url);
+    const results = await response.json();
+
+    return results.map((item) => {
+      const id = item.id;
+      return id;
+    });
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
 
 export const fetchNameFromAPI = async (gameMode, index) => {
   const url = `${swapiEnv}/${gameMode}/${index}`;
