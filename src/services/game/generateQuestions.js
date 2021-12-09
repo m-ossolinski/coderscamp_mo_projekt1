@@ -6,8 +6,8 @@ const getRandomNumber = (minInt, maxInt) => {
 
 // zamienic te funkcje na pobieranie z api
 
-const getRangeOfIds = (mode) => {
-  const modeLC = mode.toLowerCase();
+const getRangeOfIds = (gameMode) => {
+  const modeLC = gameMode.toLowerCase();
   if (modeLC === 'people') {
     const baseArr = Array(82 - 1 + 1)
       .fill()
@@ -22,14 +22,14 @@ const getRangeOfIds = (mode) => {
   }
   if (modeLC === 'starships') {
     // prettier-ignore
-    const arr = [2, 3 , 5, 9, 10, 11, 12, 13, 15, 17, 21, 22, 23, 27, 28, 29, 31, 32, 39, 40, 41, 43, 44, 47, 48, 49, 52, 53, 58, 59, 61, 63, 64, 65, 66, 68, 74, 75];
+    const arr = [2, 3 , 5, 9, 10, 11, 12, 13, 15, 17, 21, 22, 23, 27, 28, 29, 31, 32, 39, 40, 41, 43, 47, 48, 49, 52, 58, 59, 61, 63, 64, 65, 66, 68, 74, 75];
     return arr;
   } else return;
 };
 
 //
 
-const getAnswerNumbers = (arrOfNumbers) => {
+const generateAnswerNumbers = (arrOfNumbers) => {
   const minIndex = 0;
   const answerNumbers = [];
   for (let i = 0; answerNumbers.length < 4; i++) {
@@ -42,16 +42,16 @@ const getAnswerNumbers = (arrOfNumbers) => {
   return answerNumbers;
 };
 
-const getCorrectAnswerNumber = (answers) => {
+const getCorrectAnswerIds = (answers) => {
   const rand = getRandomNumber(0, answers.length - 1);
   const correctAnswer = answers[rand];
   return correctAnswer;
 };
 
-const getAnswers = async (mode, arrWithNumbers) => {
+const getAnswers = async (gameMode, arrWithNumbers) => {
   const answers = [];
   await arrWithNumbers.forEach(async (number) => {
-    await fetchNameFromAPI(mode, number).then((resp) => {
+    await fetchNameFromAPI(gameMode, number).then((resp) => {
       answers.push(resp);
       console.log(answers);
     });
@@ -59,24 +59,22 @@ const getAnswers = async (mode, arrWithNumbers) => {
   return answers;
 };
 
-const generateQuestionsForTheGameMode = async (mode) => {
-  if (typeof mode !== 'string') {
+const generateQuestionForTheGameMode = async (gameMode) => {
+  if (typeof gameMode !== 'string') {
     throw new Error('errrr');
   }
-  const rangeOfIds = getRangeOfIds(mode);
-  const answerNumbers = getAnswerNumbers(rangeOfIds);
+  const rangeOfIds = getRangeOfIds(gameMode);
+  const answerNumbers = generateAnswerNumbers(rangeOfIds);
 
-  const correctAnswerNumber = getCorrectAnswerNumber(answerNumbers);
+  const correctAnswerNumber = getCorrectAnswerIds(answerNumbers);
 
-  const img = window.btoa(await fetchImgFromAPI(mode, correctAnswerNumber));
+  const img = window.btoa(await fetchImgFromAPI(gameMode, correctAnswerNumber));
 
-  const answer = {
+  return {
     image: img,
-    answers: await getAnswers(mode, answerNumbers),
-    rightAnswer: await fetchNameFromAPI(mode, correctAnswerNumber),
+    answers: await getAnswers(gameMode, answerNumbers),
+    rightAnswer: await fetchNameFromAPI(gameMode, correctAnswerNumber),
   };
-
-  return answer;
 };
 
-export default generateQuestionsForTheGameMode;
+export default generateQuestionForTheGameMode;

@@ -1,5 +1,5 @@
-import generateQuestionsForTheGameMode from '../services/game/generateQuestions';
+import generateQuestionForTheGameMode from '../services/game/generateQuestions';
 
 export const App = ({ options }) => {
-  console.log(generateQuestionsForTheGameMode('starships'));
+  console.log(generateQuestionForTheGameMode('starships'));
 };
