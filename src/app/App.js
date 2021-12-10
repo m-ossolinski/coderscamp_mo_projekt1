@@ -13,8 +13,10 @@ export const App = ({ options }) => {
 
     rank.addToRank(currentMode, player);
 
-    rank.getRank()[currentMode].map((rankItem, idx) => {
-        console.log('miejsce', idx + 1, 'nazwa', rankItem.nickName)
-    })
+    // rank.getRank()[currentMode].map((rankItem, idx) => {
+    //     console.log('miejsce', idx + 1, 'nazwa', rankItem.nickName)
+    // })
+
+
 
 }
