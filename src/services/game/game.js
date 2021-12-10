@@ -1,6 +1,7 @@
+import GAME_MODES from "../../consts/GAME_MODES";
+
 export default class Game {
     constructor() {
-        this.selectedMode = 'people';
-        this.gameModes = ['people', 'vehicles', 'spaceships'];
+        this.selectedMode = GAME_MODES.people;
     }
 }
