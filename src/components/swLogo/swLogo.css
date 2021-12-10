@@ -1,0 +1,6 @@
+.swLogo {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  grid-area: logo;
+}
