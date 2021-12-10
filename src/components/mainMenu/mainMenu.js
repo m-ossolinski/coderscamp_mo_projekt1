@@ -1,32 +1,42 @@
 import './mainMenu.css';
 
-const PEOPLE_MODE = 'People';
-const VEHICLES_MODE = 'Vehicles';
-const STARSHIPS_MODE = 'Starships';
+const PEOPLE_MODE = 'people';
+const VEHICLES_MODE = 'vehicles';
+const STARSHIPS_MODE = 'starships';
 
-function mainMenu() {
+const getGameMode = (menuItem) => {
+  menuItem.addEventListener('click', () => {
+    const value = menuItem.dataset.id;
+    return value;
+  });
+};
+
+function createMainMenu() {
   const menuContainer = document.createElement('div');
   menuContainer.classList.add('swquiz-mainmenu');
   menuContainer.id = 'swquiz-mainmenu';
-  menuContainer.setAttribute('data-testid', 'swquiz-mainmenu');
+  menuContainer.setAttribute('data-id', 'swquiz-mainmenu');
 
   const peopleMenuItem = document.createElement('p');
-  peopleMenuItem.classList.add('swquiz-mainmenu-item');
-  peopleMenuItem.id = PEOPLE_MODE.toLowerCase();
-  peopleMenuItem.setAttribute('data-testid', PEOPLE_MODE.toLowerCase());
-  peopleMenuItem.innerText = PEOPLE_MODE;
+  peopleMenuItem.classList.add('swquiz-mainmenu-item', 'selected');
+  peopleMenuItem.id = PEOPLE_MODE;
+  peopleMenuItem.setAttribute('data-id', PEOPLE_MODE);
+  peopleMenuItem.innerText = 'People';
+  getGameMode(peopleMenuItem);
 
   const vehiclesMenuItem = document.createElement('p');
   vehiclesMenuItem.classList.add('swquiz-mainmenu-item');
-  vehiclesMenuItem.id = VEHICLES_MODE.toLowerCase();
-  vehiclesMenuItem.setAttribute('data-testid', VEHICLES_MODE.toLowerCase());
-  vehiclesMenuItem.innerText = VEHICLES_MODE;
+  vehiclesMenuItem.id = VEHICLES_MODE;
+  vehiclesMenuItem.setAttribute('data-id', VEHICLES_MODE);
+  vehiclesMenuItem.innerText = 'Vehicles';
+  getGameMode(vehiclesMenuItem);
 
   const starshipsMenuItem = document.createElement('p');
   starshipsMenuItem.classList.add('swquiz-mainmenu-item');
-  starshipsMenuItem.id = STARSHIPS_MODE.toLowerCase();
-  starshipsMenuItem.setAttribute('data-testid', STARSHIPS_MODE.toLowerCase());
-  starshipsMenuItem.innerText = STARSHIPS_MODE;
+  starshipsMenuItem.id = STARSHIPS_MODE;
+  starshipsMenuItem.setAttribute('data-id', STARSHIPS_MODE);
+  starshipsMenuItem.innerText = 'Starships';
+  getGameMode(starshipsMenuItem);
 
   menuContainer.appendChild(peopleMenuItem);
   menuContainer.appendChild(vehiclesMenuItem);
@@ -44,4 +54,4 @@ function mainMenu() {
   return menuContainer;
 }
 
-export { mainMenu };
+export { createMainMenu };
