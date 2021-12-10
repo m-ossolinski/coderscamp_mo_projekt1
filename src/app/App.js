@@ -1,5 +1,5 @@
+import generateQuestionForTheGameMode from '../services/game/generateQuestions';
+
 export const App = ({ options }) => {
-    console.log('test');
-}
-
-
+  console.log(generateQuestionForTheGameMode('people'));
+};
