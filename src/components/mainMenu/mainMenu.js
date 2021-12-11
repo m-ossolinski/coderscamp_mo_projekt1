@@ -1,10 +1,10 @@
 import './mainMenu.css';
 
-const PEOPLE_MODE = 'people';
-const VEHICLES_MODE = 'vehicles';
-const STARSHIPS_MODE = 'starships';
+export const PEOPLE_MODE = 'people';
+export const VEHICLES_MODE = 'vehicles';
+export const STARSHIPS_MODE = 'starships';
 
-const getGameMode = (menuItem) => {
+export const getGameMode = (menuItem) => {
   menuItem.addEventListener('click', () => {
     const value = menuItem.dataset.id;
     return value;
