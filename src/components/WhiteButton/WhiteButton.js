@@ -1,5 +1,5 @@
 
-export default (iconSrc, text, callback) => {
+export default function whiteButton(iconSrc, text, callback) {
     const btnWhite = document.createElement('button');
 
     btnWhite.className = 'btnWhite';
