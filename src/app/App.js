@@ -10,7 +10,8 @@ export const App = async ({ options }) => {
   swquiz.appendChild(createMainMenu());
 
   const question = await generateQuestionForTheGameMode('people');
-  const img = createImgElementPeopleMode(atob(question.image));
+
+  const img = createImgElementPeopleMode(question.image);
 
   swquiz.appendChild(img);
 };
