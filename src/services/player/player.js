@@ -17,7 +17,7 @@ export default class Player {
         const isCallback = typeof callback == 'function';
         if(!isCallback) throw new Error('Argument callback have to be a function');
 
-        const {answers, rightAnswer: correctAnswers, image} = callback();
+        const {answers, rightAnswer: correctAnswers, image} = callback(gameMode);
 
         this.question.push(gameMode);
         this.answers.push({answers, image});
