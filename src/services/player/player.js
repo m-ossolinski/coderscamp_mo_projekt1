@@ -3,9 +3,9 @@ export default class Player {
         this.playerName = playerName;
         this.points = points;
         this.id = Date.now();
-        this.questions = 0;
-        this.answers = 0;
-        this.correctAnswers = 0;
+        this.question = [];
+        this.answers = [];
+        this.correctAnswers = [];
     }
 
     save() {
@@ -13,18 +13,14 @@ export default class Player {
         localStorage.setItem('points', this.points);
     }
 
-    askQuestion(callback) {
+    getQuestion(callback, gameMode) {
         const isCallback = typeof callback == 'function';
         if(!isCallback) throw new Error('Argument callback have to be a function');
 
-        callback();
+        const {answers, rightAnswer: correctAnswers, image} = callback();
+
+        this.question.push(gameMode);
+        this.answers.push({answers, image});
+        this.correctAnswers.push(correctAnswers);
     }
-
-    giveAnswer(callback) {
-        const isCallback = typeof callback == 'function';
-        if(!isCallback) throw new Error('Argument callback have to be a function');
-
-        callback();
-    }
-
 }
