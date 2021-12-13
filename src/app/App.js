@@ -10,5 +10,7 @@ export const App = ({ options }) => {
   document.getElementById('swquiz-app').appendChild(createLogo()); //logo to be placed in final layout
   console.log(generateQuestionForTheGameMode('people'));
   document.getElementById('swquiz-app').appendChild(createMainMenu());
-  console.log(gameMode(PEOPLE_MODE_QUESTION));
+  document
+    .getElementById('swquiz-app')
+    .appendChild(gameMode(PEOPLE_MODE_QUESTION));
 };

@@ -11,14 +11,14 @@ export const STARSHIPS_MODE_QUESTION = 'Do you recognize this starship?';
 
 export const gameMode = (modeQuestion) => {
   const questionContainer = document.createElement('div');
-  const app = document.getElementById('swquiz-app');
-  app.appendChild(questionContainer);
 
   questionContainer.id = 'question';
   questionContainer.className = 'question';
   questionContainer.setAttribute('data-id', 'question');
   let questionText = document.createTextNode(`MODE: ${modeQuestion}`);
   questionContainer.appendChild(questionText);
+
+  return questionContainer;
 };
 
 export const getGameModeQuestion = (gameMode) => {
