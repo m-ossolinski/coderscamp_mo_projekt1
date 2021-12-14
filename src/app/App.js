@@ -11,5 +11,5 @@ export const App = async ({ options }) => {
   swquiz.appendChild(createLogo());
   swquiz.appendChild(createMainMenu());
   swquiz.appendChild(createImgElementPeopleMode(question.image));
-  swquiz.appendChild(createGameRulesElement('people', question));
+  swquiz.appendChild(createGameRulesElement('people', question.rightAnswer));
 };
