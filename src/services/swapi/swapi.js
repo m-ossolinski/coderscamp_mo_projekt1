@@ -36,7 +36,7 @@ export const fetchIdsFromAPI = async (gameMode) => {
 };
 
 export const fetchNameFromAPI = async (gameMode, index) => {
-  const url = `${swapiEnv}/${gameMode}/${index}`;
+  const url = `http://localhost:3000/${gameMode}/${index}`;
 
   try {
     const response = await fetch(url);
