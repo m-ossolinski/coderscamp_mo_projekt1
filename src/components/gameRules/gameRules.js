@@ -1,15 +1,15 @@
-import GAME_MODES from '../../consts/GAME_MODES';
+import { GAME_MODES } from '../../consts/GAME_MODES';
 import './gameRules.css';
 
-const createTextContent = (gameMode, answer) => {
+const gameDescriptionText = (gameMode, answer) => {
   return `You have one minute (1m) to answer as many questions as possible. During the game on each question you need to select ${
     gameMode === GAME_MODES.people ? 'who' : 'what'
   } from Star Wars is showed on the left (${answer} right now) from available options`;
 };
 
-const createGameRulesElement = (gameMode, answer) => {
-  const containerEl = document.createElement('div');
-  containerEl.classList.add('mode-rules_wrapper');
+export const createGameRulesComponent = (gameMode, answer) => {
+  const rulesComponent = document.createElement('div');
+  rulesComponent.classList.add('mode-rules');
 
   const titleEl = document.createElement('div');
   titleEl.classList.add('mode-rules_title');
@@ -27,13 +27,11 @@ const createGameRulesElement = (gameMode, answer) => {
   const rulesEl = document.createElement('div');
   rulesEl.classList.add('mode-rules_content');
 
-  const content = createTextContent(gameMode, answer);
+  const content = gameDescriptionText(gameMode, answer);
   rulesEl.innerText = content;
 
-  containerEl.appendChild(titleEl);
-  containerEl.appendChild(rulesEl);
+  rulesComponent.appendChild(titleEl);
+  rulesComponent.appendChild(rulesEl);
 
-  return containerEl;
+  return rulesComponent;
 };
-
-export default createGameRulesElement;
