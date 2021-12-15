@@ -16,7 +16,7 @@ class AutoPlayer {
     if (typeof image !== 'string') {
       throw new Error('image type error');
     }
-    if (Array.isArray(answers) == false) {
+    if (!Array.isArray(answers)) {
       throw new Error('answers is not an array error');
     }
     if (answers.length !== 4) {
@@ -30,7 +30,7 @@ class AutoPlayer {
   }
 }
 
-export default function getAutoPlayer() {
+export function getAutoPlayer() {
   const autoPlayer = new AutoPlayer();
   return autoPlayer;
 }

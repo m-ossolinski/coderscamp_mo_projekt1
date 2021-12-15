@@ -6,7 +6,7 @@ import {
   gameMode,
   PEOPLE_MODE_QUESTION
 } from '../components/gameMode/gameMode';
-import getAutoPlayer from '../services/player/autoPlayer';
+import { getAutoPlayer } from '../services/player/autoPlayer';
 
 export const App = async ({ options }) => {
   const swquiz = document.getElementById('swquiz-app');
