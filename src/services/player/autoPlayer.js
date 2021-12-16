@@ -14,13 +14,13 @@ class AutoPlayer {
     // console.log(image);
     // console.log(answers);
     if (typeof image !== 'string') {
-      throw new Error('image type error');
+      throw new Error('An error occurred while generating answer: type of image is not a string');
     }
     if (!Array.isArray(answers)) {
-      throw new Error('answers is not an array error');
+      throw new Error('An error occurred while generating answer: answers is not an array');
     }
     if (answers.length !== 4) {
-      throw new Error('expected 4 answers');
+      throw new Error('An error occurred while generating answer: answers array is expected to contain 4 answers');
     }
     const autoPlayerAnswerIndex = this.generateAutoPlayerAnswer(0, 3);
     // console.log(autoPlayerAnswerIndex);
