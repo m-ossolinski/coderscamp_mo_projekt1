@@ -1,19 +1,21 @@
-import './gameAnswers.css';
+import './answersCard.css';
 import isAnswerCorrect from '../../services/game/isAnswerCorrect';
 
-export function gameAnswers(answers, rightAnswer, callback) {
-  if (!Array.isArray(answers)) throw new Error('Answers array is not an array');
-  if (answers.length === 0) throw new Error('Answers array has no content');
-  if (typeof rightAnswer !== 'string')
-    throw new Error('rightAnswer must be a string');
-  if (typeof callback !== 'function')
-    throw new Error('callback should be a function');
+export function answersCard(possibleAnswers, correctAnswer, savePlayerAnswers) {
+  if (!Array.isArray(possibleAnswers))
+    throw new Error('possibleAnswers array is not an array');
+  if (possibleAnswers.length === 0)
+    throw new Error('possibleAnswers array has no content');
+  if (typeof correctAnswer !== 'string')
+    throw new Error('correctAnswer must be a string');
+  if (typeof savePlayerAnswers !== 'function')
+    throw new Error('savePlayerAnswers should be a function');
 
   const swquiz = document.getElementById('swquiz-app');
   const wrapper = document.createElement('div');
   wrapper.setAttribute('class', 'answer__wrapper');
 
-  answers.forEach((answer) => {
+  possibleAnswers.forEach((answer) => {
     const button = document.createElement('button');
     button.setAttribute('class', 'answer__button');
     button.classList.remove('answer__button--correct', 'answer__button--wrong');
@@ -28,14 +30,13 @@ export function gameAnswers(answers, rightAnswer, callback) {
 
     button.addEventListener('click', () => {
       const selectedAnswer = button.textContent;
-      const checkAnswer = isAnswerCorrect(rightAnswer, selectedAnswer);
 
-      if (checkAnswer === true) {
+      if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
         button.classList.add('answer__button--correct');
-        callback(selectedAnswer, true);
+        savePlayerAnswers(selectedAnswer, true);
       } else {
         button.classList.add('answer__button--wrong');
-        callback(selectedAnswer, false);
+        savePlayerAnswers(selectedAnswer, false);
       }
     });
   });
