@@ -1,57 +1,63 @@
 import './mainMenu.css';
 
-export const PEOPLE_MODE = 'people';
-export const VEHICLES_MODE = 'vehicles';
-export const STARSHIPS_MODE = 'starships';
+export const PEOPLE_MODE = 'People';
+export const VEHICLES_MODE = 'Vehicles';
+export const STARSHIPS_MODE = 'Starships';
 
-export const getGameMode = (menuItem) => {
-  menuItem.addEventListener('click', () => {
-    const value = menuItem.dataset.id;
-    return value;
+export function setGameMode(mode) {
+  mode = mode.textContent || mode;
+  window.globalThis.activeGameMode = mode;
+}
+
+export function getGameMode() {
+  return window.globalThis.activeGameMode;
+}
+
+const createMenuItem = (className, textContent, onClickCallback) => {
+  const item = document.createElement('p');
+  item.classList.add(className);
+  item.textContent = textContent;
+  item.setAttribute('data-test', 'menuItem');
+  item.addEventListener('click', function () {
+    for (let item of this.parentNode.children) {
+      item.classList.remove('selected');
+    }
+    this.classList.add('selected');
+    onClickCallback(this);
   });
+  return item;
 };
 
-function createMainMenu() {
+const createMainMenu = (settingGameModeCallback) => {
   const menuContainer = document.createElement('div');
   menuContainer.classList.add('swquiz-mainmenu');
-  menuContainer.id = 'swquiz-mainmenu';
-  menuContainer.setAttribute('data-id', 'swquiz-mainmenu');
+  menuContainer.id = 'menuContainer';
+  menuContainer.setAttribute('data-test', 'menuContainer');
 
-  const peopleMenuItem = document.createElement('p');
-  peopleMenuItem.classList.add('swquiz-mainmenu-item', 'selected');
-  peopleMenuItem.id = PEOPLE_MODE;
-  peopleMenuItem.setAttribute('data-id', PEOPLE_MODE);
-  peopleMenuItem.innerText = 'People';
-  getGameMode(peopleMenuItem);
-
-  const vehiclesMenuItem = document.createElement('p');
-  vehiclesMenuItem.classList.add('swquiz-mainmenu-item');
-  vehiclesMenuItem.id = VEHICLES_MODE;
-  vehiclesMenuItem.setAttribute('data-id', VEHICLES_MODE);
-  vehiclesMenuItem.innerText = 'Vehicles';
-  getGameMode(vehiclesMenuItem);
-
-  const starshipsMenuItem = document.createElement('p');
-  starshipsMenuItem.classList.add('swquiz-mainmenu-item');
-  starshipsMenuItem.id = STARSHIPS_MODE;
-  starshipsMenuItem.setAttribute('data-id', STARSHIPS_MODE);
-  starshipsMenuItem.innerText = 'Starships';
-  getGameMode(starshipsMenuItem);
-
-  menuContainer.appendChild(peopleMenuItem);
-  menuContainer.appendChild(vehiclesMenuItem);
-  menuContainer.appendChild(starshipsMenuItem);
-
-  const mainMenuItems = [peopleMenuItem, vehiclesMenuItem, starshipsMenuItem];
-
-  mainMenuItems.forEach((item) => {
-    item.addEventListener('click', function () {
-      mainMenuItems.forEach((item) => item.classList.remove('selected'));
-      this.classList.add('selected');
-    });
-  });
+  const itemPeople = createMenuItem(
+    'swquiz-mainmenu-item',
+    PEOPLE_MODE,
+    settingGameModeCallback
+  );
+  itemPeople.classList.add('selected');
+  setGameMode(PEOPLE_MODE);
+  menuContainer.appendChild(itemPeople);
+  menuContainer.appendChild(
+    createMenuItem(
+      'swquiz-mainmenu-item',
+      VEHICLES_MODE,
+      settingGameModeCallback
+    )
+  );
+  menuContainer.appendChild(
+    createMenuItem(
+      'swquiz-mainmenu-item',
+      STARSHIPS_MODE,
+      settingGameModeCallback
+    )
+  );
 
   return menuContainer;
-}
+};
 
 export { createMainMenu };

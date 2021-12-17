@@ -1,6 +1,6 @@
 import createLogo from '../components/swLogo/swLogo';
 import generateQuestionForTheGameMode from '../services/game/generateQuestions';
-import { createMainMenu } from '../components/mainMenu/mainMenu';
+import { createMainMenu, setGameMode } from '../components/mainMenu/mainMenu';
 import createImgElementPeopleMode from '../components/recognitionImg/ImgModePeople/ImgModePeople';
 import {
   gameMode,
@@ -13,7 +13,7 @@ export const App = async ({ options }) => {
   const question = await generateQuestionForTheGameMode('people');
 
   swquiz.appendChild(createLogo());
-  swquiz.appendChild(createMainMenu());
+  swquiz.appendChild(createMainMenu(setGameMode));
   swquiz.appendChild(gameMode(PEOPLE_MODE_QUESTION));
 
   swquiz.appendChild(createImgElementPeopleMode(question.image));
