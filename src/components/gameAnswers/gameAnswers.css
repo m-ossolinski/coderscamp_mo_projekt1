@@ -1,0 +1,41 @@
+.answer__wrapper {
+  width: 100%;
+  grid-area: game;
+  text-align: center;
+}
+
+.answer__button {
+  background-color: white;
+  margin: 2%;
+  width: 45%;
+  height: 10rem;
+  border: none;
+  border-radius: 1.6rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: inline-block;
+}
+
+.answer__button:hover {
+  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.answer__button--label {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 4.2rem;
+  line-height: 5.1rem;
+  text-align: center;
+}
+
+.answer__button--correct {
+  background: #41ed25;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 30px #51fc00;
+  border-radius: 1.6rem;
+}
+
+.answer__button--wrong {
+  background: #ff0000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 30px #ff0000;
+  border-radius: 1.6rem;
+}
