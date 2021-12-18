@@ -29,12 +29,12 @@ body {
 
 #swquiz-app {
   display: grid;
-  grid-template-columns: 30% 60%;
+  /*grid-template-columns: 30% 60%;
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     'logo modeMenu'
     'img game'
-    'timer timer';
+    'timer timer';*/
   justify-content: center;
   justify-items: center;
   align-items: center;
@@ -64,7 +64,5 @@ body {
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%) 
+  transform: translate(-50%, -50%);
 }
-
-
