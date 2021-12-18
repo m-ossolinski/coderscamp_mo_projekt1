@@ -6,6 +6,7 @@ import {
   gameMode,
   PEOPLE_MODE_QUESTION
 } from '../components/gameMode/gameMode';
+import { getAutoPlayer } from '../services/player/autoPlayer';
 import { createGameRulesComponent } from '../components/gameRules/gameRules';
 
 export const App = async ({ options }) => {
