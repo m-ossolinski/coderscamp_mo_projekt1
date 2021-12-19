@@ -1,37 +1,21 @@
 import './TextTimer.css';
 
-export default function TextTimer(callback = () => null) {
-    let minute = 1;
-    let sec = 30;
-    const counterOutput = document.createElement('p');
+export default function TextTimer(minute, sec) {
+
+    const counterOutput = document.createElement('div');
     counterOutput.className = 'counterOutput';
+    let remainingTime = `${minute} : ${sec}`;
 
-    function printTime(minute, sec) {
-        let remainingTime = `${minute} : ${sec}`;
-        if (minute === 0 && sec === 0) {
-            clearInterval(interval);
-            remainingTime = 'Time end';
-            callback();
-        } else {
-            if (sec < 10) {
-                sec = `0${sec}`;
-            }
-            remainingTime = `Time Left: ${minute}m : ${sec}s`;
+    if (minute === 0 && sec === 0) {
+        remainingTime = 'Time end';
+    } else {
+        if (sec < 10) {
+            sec = `0${sec}`;
         }
-
-        counterOutput.innerText = remainingTime;
+        remainingTime = `Time Left: ${minute}m : ${sec}s`;
     }
 
-    let interval = window.setInterval(function () {
-        printTime(minute, sec);
-        sec--;
-
-        if (minute != 0 && sec === 0) {
-            minute--;
-            sec = 59;
-        }
-
-    }, 1000);
+    counterOutput.innerText = remainingTime;
 
     return counterOutput;
 }

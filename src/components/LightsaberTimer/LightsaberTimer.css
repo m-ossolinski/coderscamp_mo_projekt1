@@ -1,0 +1,34 @@
+:root {
+    --progress: 0%;
+}
+
+.saberArea {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.saberHandle {
+    width: 15vmax;
+    height: auto;
+}
+
+.saberLight {
+    width: 100%;
+    height: 2vh;
+    margin-left: -1vw;
+    background-color: #BCBCBC;
+    border-radius: 6px;
+  }
+
+  .saberLight:before {
+      content: '';
+      height: 2vh;
+      display: block;
+      width: var(--progress);
+      background-color: white;
+      box-shadow: 0 3px 3px rgb(150 0 0 / 90%), 5em 0 10em 5em rgb(255 0 0 / 90%);
+      border-radius: 6px;
+  }
+
+
