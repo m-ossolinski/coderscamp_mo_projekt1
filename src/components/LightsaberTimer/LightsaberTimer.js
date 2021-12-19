@@ -1,5 +1,4 @@
 import './LightsaberTimer.css';
-import LightSaberHandle from '../../../static/assets/ui/LightSaberHandle.png';
 
 export default function LightsaberTimer(progress) {
     const root = document.querySelector(':root');
@@ -8,7 +7,7 @@ export default function LightsaberTimer(progress) {
     saberArea.className = 'saberArea';
 
     const saberHandle = new Image();
-    saberHandle.src = LightSaberHandle;
+    saberHandle.src = '../../static/assets/ui/LightSaberHandle.png';
     saberHandle.className = 'saberHandle';
     saberHandle.setAttribute('alt', 'Star Wars Saber Handle');
     saberArea.appendChild(saberHandle);
