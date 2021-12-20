@@ -40,6 +40,8 @@
 .right_wrapper {
   width: 100%;
   margin: 1rem;
+  height: 400px;
+  /*overflow-y: scroll;*/
 }
 
 .right-wrapper_title {
@@ -103,6 +105,62 @@
 .form_name-label {
   font-size: 2.5rem;
   width: 100%;
+}
+
+/* table */
+
+.table {
+  display: flex;
+  flex-flow: column;
+  height: 90%;
+  width: 100%;
+  font-size: 5rem;
+  text-align: center;
+}
+
+.table_thead {
+}
+
+.table_theadTr {
+  font-size: 3rem;
+  color: grey;
+  flex: 0 0 auto;
+  width: calc(100% - 0.2em);
+  display: table;
+  table-layout: fixed;
+}
+
+.table_body {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: scroll;
+}
+
+.table_body tr {
+  width: 100%;
+  padding: 1rem 0;
+  display: table;
+  table-layout: fixed;
+  font-size: 2.5rem;
+}
+
+.table_img {
+  width: 80px;
+  height: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    4px 12px 10px rgba(233, 10, 7, 0.9);
+}
+
+.table-answer--default {
+  color: black;
+}
+
+.table-answer--correct {
+  color: green;
+}
+
+.table-answer--notcorrect {
+  color: red;
 }
 
 @keyframes pulse {

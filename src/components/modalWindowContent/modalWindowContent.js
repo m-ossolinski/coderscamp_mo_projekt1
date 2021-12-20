@@ -3,7 +3,7 @@ import './modalWindowContent.css';
 const answersList = [
   {
     id: 1,
-    img: '../../static/assets/img/modes/people/13.jpg',
+    img: '../../../static/assets/img/modes/people/13.jpg',
     correctAnswer: 'Chewbacca',
     human: {
       answer: 'Chewbacca',
@@ -16,7 +16,33 @@ const answersList = [
   },
   {
     id: 2,
-    img: '../..//static/assets/img/modes/people/7.jpg',
+    img: '../../../static/assets/img/modes/people/7.jpg',
+    correctAnswer: 'Beru Whitesun lars',
+    human: {
+      answer: 'Beru Whitesun lars',
+      isCorrect: true
+    },
+    autoPlayer: {
+      answer: 'Darth Vader',
+      isCorrect: false
+    }
+  },
+  {
+    id: 3,
+    img: '../../../static/assets/img/modes/people/13.jpg',
+    correctAnswer: 'Chewbacca',
+    human: {
+      answer: 'Chewbacca',
+      isCorrect: true
+    },
+    autoPlayer: {
+      answer: 'Darth Vader',
+      isCorrect: false
+    }
+  },
+  {
+    id: 4,
+    img: '../../../static/assets/img/modes/people/7.jpg',
     correctAnswer: 'Beru Whitesun lars',
     human: {
       answer: 'Beru Whitesun lars',
@@ -69,6 +95,46 @@ const getTextForEndGame = (answersList) => {
   return text;
 };
 
+const createTable = (answersList) => {
+  const table = document.createElement('table');
+  table.classList.add('table');
+  const thead = document.createElement('thead');
+  thead.classList.add('table_thead');
+  const theadTr = document.createElement('tr');
+  theadTr.classList.add('table_theadTr');
+
+  const columnNames = ['', 'You', 'Computer', 'Answer'];
+  columnNames.forEach((name) => {
+    const th = document.createElement('th');
+    th.innerText = `${name}`;
+    theadTr.appendChild(th);
+  });
+
+  thead.appendChild(theadTr);
+  table.appendChild(theadTr);
+
+  const tableBody = document.createElement('tbody');
+  tableBody.classList.add('table_body');
+
+  answersList.forEach((answer) => {
+    const markup = `
+        <tr> 
+          <td> <img src="${answer.img}" class="table_img"/> </td>
+          <td class="table-answer--${
+            answer.human.isCorrect ? 'correct' : 'notcorrect'
+          }"> ${answer.human.answer} </td>
+          <td class="table-answer--${
+            answer.autoPlayer.isCorrect ? 'correct' : 'notcorrect'
+          }"> ${answer.autoPlayer.answer} </td>
+          <td class="table-answer--default"> ${answer.correctAnswer} </td>
+        </tr>`;
+    tableBody.insertAdjacentHTML('beforeend', markup);
+  });
+
+  table.appendChild(tableBody);
+  return table;
+};
+
 export const modalContent = (/*answersList, saveScore*/) => {
   const content = document.createElement('div');
   content.classList.add('content');
@@ -98,15 +164,8 @@ export const modalContent = (/*answersList, saveScore*/) => {
   answersHeading.innerText = 'Detailed answers:';
   rightContainer.appendChild(answersHeading);
 
-  const getAnswers = () => {
-    const answersContainer = document.createElement('div');
-    answersContainer.classList.add('answers');
-
-    const columnNames = ['', 'You', 'Computer', 'Answer'];
-    columnNames.forEach((name) => {
-      // moze jako tablice ?
-    });
-  };
+  const table = createTable(answersList);
+  rightContainer.appendChild(table);
 
   middleContainer.appendChild(rightContainer);
 
