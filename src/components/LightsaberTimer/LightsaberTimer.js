@@ -1,6 +1,6 @@
 import './LightsaberTimer.css';
 
-export default function LightsaberTimer(progress) {
+export function LightsaberTimer(progress) {
     const root = document.querySelector(':root');
     root.style.setProperty('--progress', `${progress}%`);
     const saberArea = document.createElement('div');

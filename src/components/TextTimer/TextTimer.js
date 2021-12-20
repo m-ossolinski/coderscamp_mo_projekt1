@@ -1,18 +1,17 @@
 import './TextTimer.css';
 
-export default function TextTimer(minute, sec) {
-
+export function TextTimer(minutes, seconds) {
     const counterOutput = document.createElement('div');
     counterOutput.className = 'counterOutput';
-    let remainingTime = `${minute} : ${sec}`;
+    let remainingTime = `${minutes} : ${seconds}`;
 
-    if (minute === 0 && sec === 0) {
+    if (minutes === 0 && seconds === 0) {
         remainingTime = 'Time end';
     } else {
-        if (sec < 10) {
-            sec = `0${sec}`;
+        if (seconds < 10) {
+            seconds = `0${seconds}`;
         }
-        remainingTime = `Time Left: ${minute}m : ${sec}s`;
+        remainingTime = `Time Left: ${minutes}m : ${seconds}s`;
     }
 
     counterOutput.innerText = remainingTime;

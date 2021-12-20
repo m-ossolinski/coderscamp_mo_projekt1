@@ -1,0 +1,1 @@
+export const convertTimeToSeconds = (minutes, seconds) => minutes * 60 + seconds;

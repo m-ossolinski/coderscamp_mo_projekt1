@@ -1,30 +1,30 @@
 import './Timer.css';
-import TextTimer from '../TextTimer/TextTimer';
-import LightsaberTimer from '../LightsaberTimer/LightsaberTimer';
+import { TextTimer } from '../TextTimer/TextTimer';
+import { LightsaberTimer } from '../LightsaberTimer/LightsaberTimer';
+import { convertTimeToSeconds } from '../../utils/helpers/convertTimeToSeconds';
 
-export default function Timer(callback = () => null) {
-    let minute = 1;
-    let sec = 30;
-    let allSeconds = (minute * 60 + sec);
+export function Timer() {
+    let minutes = 1;
+    let seconds = 30;
+    let allSeconds = convertTimeToSeconds(minutes, seconds);
     const timerArea = document.createElement('div');
     timerArea.className = 'timerArea';
 
     let interval = window.setInterval(function () {
-        sec--;
+        seconds--;
 
-        if (minute != 0 && sec === 0) {
-            minute--;
-            sec = 59;
+        if (minutes != 0 && seconds === 0) {
+            minutes--;
+            seconds = 59;
         }
-        if (minute === 0 && sec === 0) {
-            clearInterval(interval);
-            callback();
+        if (minutes === 0 && seconds === 0) {
+            return clearInterval(interval);
         }
 
-        let remainingSeconds = Math.round(((minute * 60 + sec) / allSeconds * 100), 2);
+        let progressValue = Math.round((convertTimeToSeconds(minutes, seconds) / allSeconds * 100), 2);
         timerArea.textContent = '';
-        timerArea.appendChild(LightsaberTimer(remainingSeconds));
-        timerArea.appendChild(TextTimer(minute, sec));
+        timerArea.appendChild(LightsaberTimer(progressValue));
+        timerArea.appendChild(TextTimer(minutes, seconds));
 
     }, 1000);
 

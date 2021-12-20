@@ -8,8 +8,7 @@ import {
 } from '../components/gameMode/gameMode';
 import { getAutoPlayer } from '../services/player/autoPlayer';
 import { createGameRulesComponent } from '../components/gameRules/gameRules';
-import Timer from '../components/Timer/Timer';
-
+import { Timer } from '../components/Timer/Timer';
 export const App = async ({ options }) => {
     const swquiz = document.getElementById('swquiz-app');
     //const question = await generateQuestionForTheGameMode('people');
