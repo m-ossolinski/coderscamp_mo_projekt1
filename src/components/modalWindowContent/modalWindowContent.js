@@ -1,5 +1,7 @@
 import './modalWindowContent.css';
 
+/* EXAMPLE DATA 
+
 const answersList = [
   {
     id: 1,
@@ -29,23 +31,23 @@ const answersList = [
   },
   {
     id: 3,
-    img: '../../../static/assets/img/modes/people/13.jpg',
-    correctAnswer: 'Chewbacca',
+    img: '../../../static/assets/img/modes/people/19.jpg',
+    correctAnswer: 'Jek Tono Porkins',
     human: {
       answer: 'Chewbacca',
-      isCorrect: true
+      isCorrect: false
     },
     autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
+      answer: 'Jek Tono Porkins',
+      isCorrect: true
     }
   },
   {
     id: 4,
-    img: '../../../static/assets/img/modes/people/7.jpg',
-    correctAnswer: 'Beru Whitesun lars',
+    img: '../../../static/assets/img/modes/people/26.jpg',
+    correctAnswer: 'Lobot',
     human: {
-      answer: 'Beru Whitesun lars',
+      answer: 'Lobot',
       isCorrect: true
     },
     autoPlayer: {
@@ -53,7 +55,12 @@ const answersList = [
       isCorrect: false
     }
   }
-];
+]; */
+
+const hideModal = () => {
+  const modal = document.querySelector('.content');
+  modal.classList.add('hidden');
+};
 
 const countCorrectAnswers = (answersList, player) => {
   const answers = [];
@@ -93,6 +100,35 @@ const getTextForEndGame = (answersList) => {
     autoPlayer
   );
   return text;
+};
+
+const createTitle = () => {
+  const title = document.createElement('h2');
+  title.classList.add('content_title');
+  title.innerText = 'GAME OVER';
+  return title;
+};
+
+const createSummary = (answersList) => {
+  const summary = document.createElement('p');
+  summary.classList.add('content_summary');
+  summary.innerText = getTextForEndGame(answersList);
+  return summary;
+};
+
+const createHeroImg = () => {
+  const img = new Image();
+  img.classList.add('middle-wrapper_img');
+  img.src = '../../static/assets/ui/MasterYodaLeft.png';
+  img.alt = 'MasterYoda';
+  return img;
+};
+
+const createAnswersHeading = () => {
+  const answersHeading = document.createElement('h3');
+  answersHeading.classList.add('right-wrapper_title');
+  answersHeading.innerText = 'Detailed answers:';
+  return answersHeading;
 };
 
 const createTable = (answersList) => {
@@ -135,33 +171,83 @@ const createTable = (answersList) => {
   return table;
 };
 
-export const modalContent = (/*answersList, saveScore*/) => {
+const createNameInput = () => {
+  const nameInput = document.createElement('input');
+  nameInput.classList.add('form_name-input');
+  nameInput.setAttribute('id', 'name');
+  nameInput.setAttribute('placeholder', 'Type your name here');
+  return nameInput;
+};
+
+const createNameLabel = () => {
+  const nameLabel = document.createElement('label');
+  nameLabel.classList.add('form_name-label');
+  nameLabel.setAttribute('for', 'name');
+  nameLabel.innerText =
+    'Please fill your name in order to receive eternal glory in whole Galaxy!';
+  return nameLabel;
+};
+
+const createWarning = () => {
+  const warning = document.createElement('span');
+  warning.innerText = 'This field cannot be empty';
+  warning.classList.add('form_warning');
+  return warning;
+};
+
+const showWarning = () => {
+  const warning = document.querySelector('.form_warning');
+  warning.classList.add('form_warning--active');
+};
+
+const hideWarning = () => {
+  const warning = document.querySelector('.form_warning');
+  warning.classList.remove('form_warning--active');
+};
+
+const createSubmitButton = () => {
+  const submitBtn = document.createElement('button');
+  submitBtn.classList.add('form_submitBtn');
+  submitBtn.setAttribute('type', 'submit');
+  const submitTxt = 'may the force be with you';
+  submitBtn.innerText = submitTxt.toUpperCase();
+  return submitBtn;
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const input = document.querySelector('.form_name-input');
+  const playerName = input.value;
+  if (playerName === '') {
+    showWarning();
+  } else {
+    const score = countCorrectAnswers(answersList, 'human').length;
+    saveScore(playerName, score);
+    input.value = '';
+    setTimeout(() => {
+      hideModal();
+    }, 1000);
+  }
+};
+
+export const modalContent = (answersList, saveScore) => {
   const content = document.createElement('div');
   content.classList.add('content');
 
-  const title = document.createElement('h2');
-  title.classList.add('content_title');
-  title.innerText = 'GAME OVER';
+  const title = createTitle();
 
-  const summary = document.createElement('p');
-  summary.classList.add('content_summary');
-  summary.innerText = getTextForEndGame(answersList);
+  const summary = createSummary(answersList);
 
   const middleContainer = document.createElement('div');
   middleContainer.classList.add('middle_wrapper');
 
-  const img = new Image();
-  img.classList.add('middle-wrapper_img');
-  img.src = '../../static/assets/ui/MasterYodaLeft.png';
-  img.alt = 'MasterYoda';
+  const img = createHeroImg();
   middleContainer.appendChild(img);
 
   const rightContainer = document.createElement('div');
   rightContainer.classList.add('right_wrapper');
 
-  const answersHeading = document.createElement('h3');
-  answersHeading.classList.add('right-wrapper_title');
-  answersHeading.innerText = 'Detailed answers:';
+  const answersHeading = createAnswersHeading();
   rightContainer.appendChild(answersHeading);
 
   const table = createTable(answersList);
@@ -170,32 +256,18 @@ export const modalContent = (/*answersList, saveScore*/) => {
   middleContainer.appendChild(rightContainer);
 
   const form = document.createElement('form');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('submitting the form');
-    // input musi byc walidowany w funkcji submit//
-    /*savescore(imie gracza, punktacja)*/
-  };
   form.classList.add('content_form');
 
-  const nameInput = document.createElement('input');
-  nameInput.classList.add('form_name-input');
-  nameInput.setAttribute('id', 'name');
-  nameInput.setAttribute('placeholder', 'Type your name here');
+  const nameInput = createNameInput();
+  nameInput.addEventListener('focus', () => hideWarning());
 
-  const nameLabel = document.createElement('label');
-  nameLabel.classList.add('form_name-label');
-  nameLabel.setAttribute('for', 'name');
-  nameLabel.innerText =
-    'Please fill your name in order to receive eternal glory in whole Galaxy!';
+  const nameLabel = createNameLabel();
+  const warning = createWarning();
 
-  const submitBtn = document.createElement('button');
-  submitBtn.classList.add('form_submitBtn');
-  submitBtn.setAttribute('type', 'submit');
-  const submitTxt = 'may the force be with you';
-  submitBtn.innerText = submitTxt.toUpperCase();
+  const submitBtn = createSubmitButton();
   submitBtn.addEventListener('click', (e) => handleSubmit(e));
 
+  form.appendChild(warning);
   form.appendChild(nameInput);
   form.appendChild(nameLabel);
   form.appendChild(submitBtn);
@@ -204,6 +276,6 @@ export const modalContent = (/*answersList, saveScore*/) => {
   content.appendChild(summary);
   content.appendChild(middleContainer);
   content.appendChild(form);
-  console.log(content);
+
   return content;
 };
