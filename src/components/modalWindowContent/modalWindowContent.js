@@ -1,6 +1,6 @@
 import './modalWindowContent.css';
 
-/* EXAMPLE DATA 
+/* EXAMPLE DATA  
 
 const answersList = [
   {
@@ -57,7 +57,7 @@ const answersList = [
   }
 ]; */
 
-const hideModal = () => {
+const hideModalVisibility = () => {
   const modal = document.querySelector('.content');
   modal.classList.add('hidden');
 };
@@ -72,13 +72,13 @@ const countCorrectAnswers = (answersList, player) => {
   return answers;
 };
 
-const getYodaQuote = (humanPlayer, autoPlayer) => {
+const setYodaQuoteString = (humanPlayer, autoPlayer) => {
   if (humanPlayer > autoPlayer) {
     return 'The force is strong in you young Padawan!';
   } else return 'Much to learn you still have...my young Padawan.';
 };
 
-const getStringForEndGame = (
+const setFinishGameString = (
   quote,
   questionsNumber,
   humanAnswers,
@@ -87,14 +87,14 @@ const getStringForEndGame = (
   return `${quote} During 1 minute you have answered ${humanAnswers} / ${questionsNumber} questions. And Google guessed ${autoPlayerAnswers} / ${questionsNumber}.`;
 };
 
-const getTextForEndGame = (answersList) => {
+const getFinishGameString = (answersList) => {
   const questionsNumber = answersList.length;
 
   const human = countCorrectAnswers(answersList, 'human').length;
   const autoPlayer = countCorrectAnswers(answersList, 'autoPlayer').length;
 
-  const text = getStringForEndGame(
-    getYodaQuote(human, autoPlayer),
+  const text = setFinishGameString(
+    setYodaQuoteString(human, autoPlayer),
     questionsNumber,
     human,
     autoPlayer
@@ -102,17 +102,17 @@ const getTextForEndGame = (answersList) => {
   return text;
 };
 
-const createTitle = () => {
+const prepareEndGameText = () => {
   const title = document.createElement('h2');
   title.classList.add('content_title');
   title.innerText = 'GAME OVER';
   return title;
 };
 
-const createSummary = (answersList) => {
+const prepareEndGameSummary = (answersList) => {
   const summary = document.createElement('p');
   summary.classList.add('content_summary');
-  summary.innerText = getTextForEndGame(answersList);
+  summary.innerText = getFinishGameString(answersList);
   return summary;
 };
 
@@ -131,44 +131,46 @@ const createAnswersHeading = () => {
   return answersHeading;
 };
 
-const createTable = (answersList) => {
-  const table = document.createElement('table');
-  table.classList.add('table');
-  const thead = document.createElement('thead');
-  thead.classList.add('table_thead');
-  const theadTr = document.createElement('tr');
-  theadTr.classList.add('table_theadTr');
+const displayResultsresultsTable = (answersList) => {
+  const resultsTable = document.createElement('resultsTable');
+  resultsTable.classList.add('resultsTable');
+  const header = document.createElement('thead');
+  header.classList.add('resultsTable_header');
+  const headerRow = document.createElement('tr');
+  headerRow.classList.add('resultsTable_header-row');
 
   const columnNames = ['', 'You', 'Computer', 'Answer'];
   columnNames.forEach((name) => {
     const th = document.createElement('th');
     th.innerText = `${name}`;
-    theadTr.appendChild(th);
+    headerRow.appendChild(th);
   });
 
-  thead.appendChild(theadTr);
-  table.appendChild(theadTr);
+  header.appendChild(headerRow);
+  resultsTable.appendChild(headerRow);
 
-  const tableBody = document.createElement('tbody');
-  tableBody.classList.add('table_body');
+  const resultsTableBody = document.createElement('tbody');
+  resultsTableBody.classList.add('resultsTable_body');
 
   answersList.forEach((answer) => {
     const markup = `
         <tr> 
-          <td> <img src="${answer.img}" class="table_img"/> </td>
-          <td class="table-answer--${
-            answer.human.isCorrect ? 'correct' : 'notcorrect'
+          <td> <img src="${answer.img}" class="resultsTable_img"/> </td>
+          <td class="resultsTable_answer--${
+            answer.human.isCorrect ? 'correct' : 'incorrect'
           }"> ${answer.human.answer} </td>
-          <td class="table-answer--${
-            answer.autoPlayer.isCorrect ? 'correct' : 'notcorrect'
+          <td class="resultsTable_answer--${
+            answer.autoPlayer.isCorrect ? 'correct' : 'incorrect'
           }"> ${answer.autoPlayer.answer} </td>
-          <td class="table-answer--default"> ${answer.correctAnswer} </td>
+          <td class="resultsTable_answer--default"> ${
+            answer.correctAnswer
+          } </td>
         </tr>`;
-    tableBody.insertAdjacentHTML('beforeend', markup);
+    resultsTableBody.insertAdjacentHTML('beforeend', markup);
   });
 
-  table.appendChild(tableBody);
-  return table;
+  resultsTable.appendChild(resultsTableBody);
+  return resultsTable;
 };
 
 const createNameInput = () => {
@@ -214,7 +216,7 @@ const createSubmitButton = () => {
   return submitBtn;
 };
 
-const handleSubmit = (e) => {
+const handleSaveUserResult = (e, saveScore) => {
   e.preventDefault();
   const input = document.querySelector('.form_name-input');
   const playerName = input.value;
@@ -225,7 +227,7 @@ const handleSubmit = (e) => {
     saveScore(playerName, score);
     input.value = '';
     setTimeout(() => {
-      hideModal();
+      hideModalVisibility();
     }, 1000);
   }
 };
@@ -234,9 +236,9 @@ export const modalContent = (answersList, saveScore) => {
   const content = document.createElement('div');
   content.classList.add('content');
 
-  const title = createTitle();
+  const title = prepareEndGameText();
 
-  const summary = createSummary(answersList);
+  const summary = prepareEndGameSummary(answersList);
 
   const middleContainer = document.createElement('div');
   middleContainer.classList.add('middle_wrapper');
@@ -250,8 +252,8 @@ export const modalContent = (answersList, saveScore) => {
   const answersHeading = createAnswersHeading();
   rightContainer.appendChild(answersHeading);
 
-  const table = createTable(answersList);
-  rightContainer.appendChild(table);
+  const resultsTable = displayResultsresultsTable(answersList);
+  rightContainer.appendChild(resultsTable);
 
   middleContainer.appendChild(rightContainer);
 
@@ -265,7 +267,9 @@ export const modalContent = (answersList, saveScore) => {
   const warning = createWarning();
 
   const submitBtn = createSubmitButton();
-  submitBtn.addEventListener('click', (e) => handleSubmit(e));
+  submitBtn.addEventListener('click', (e) =>
+    handleSaveUserResult(e, saveScore)
+  );
 
   form.appendChild(warning);
   form.appendChild(nameInput);
