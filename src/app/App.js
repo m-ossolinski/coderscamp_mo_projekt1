@@ -8,7 +8,6 @@ import {
 } from '../components/gameMode/gameMode';
 import { getAutoPlayer } from '../services/player/autoPlayer';
 import { createGameRulesComponent } from '../components/gameRules/gameRules';
-import { modalContent } from '../components/modalWindowContent/modalWindowContent';
 
 export const App = async ({ options }) => {
   const swquiz = document.getElementById('swquiz-app');

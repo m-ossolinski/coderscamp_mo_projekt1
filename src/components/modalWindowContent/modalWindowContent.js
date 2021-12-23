@@ -131,7 +131,7 @@ const createAnswersHeading = () => {
   return answersHeading;
 };
 
-const displayResultsresultsTable = (answersList) => {
+const displayResultsTable = (answersList) => {
   const resultsTable = document.createElement('resultsTable');
   resultsTable.classList.add('resultsTable');
   const header = document.createElement('thead');
@@ -232,7 +232,7 @@ const handleSaveUserResult = (e, saveScore) => {
   }
 };
 
-export const modalContent = (answersList, saveScore) => {
+export const gameResultsModal = (answersList, saveScore) => {
   const content = document.createElement('div');
   content.classList.add('content');
 
@@ -252,7 +252,7 @@ export const modalContent = (answersList, saveScore) => {
   const answersHeading = createAnswersHeading();
   rightContainer.appendChild(answersHeading);
 
-  const resultsTable = displayResultsresultsTable(answersList);
+  const resultsTable = displayResultsTable(answersList);
   rightContainer.appendChild(resultsTable);
 
   middleContainer.appendChild(rightContainer);
