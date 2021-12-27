@@ -1,3 +1,4 @@
+import './whiteButton.css';
 
 export default function whiteButton(iconSrc, text, callback) {
     const btnWhite = document.createElement('button');
@@ -19,7 +20,8 @@ export default function whiteButton(iconSrc, text, callback) {
     }
 
     if (callback) {
-        btnWhite.onclick = callback;
+        // btnWhite.onclick = callback;
+        btnWhite.addEventListener('click', callback);
     }
 
     return btnWhite;

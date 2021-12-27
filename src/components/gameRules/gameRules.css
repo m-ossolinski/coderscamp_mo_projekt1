@@ -1,8 +1,8 @@
 .mode-rules {
-  width: 70%;
+  width: 100%;
   height: min-content;
   background-color: white;
-  padding: 4rem 2rem;
+  padding: 4rem;
   grid-area: game;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
 }
 
 .mode-rules_title {
-  font-size: 3.5rem;
+  font-size: 5.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@
 
 .mode-rules_content {
   margin-top: 2rem;
-  font-size: 2rem;
+  font-size: 3rem;
   text-align: justify;
-  line-height: 3rem;
+  line-height: 4rem;
 }
