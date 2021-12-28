@@ -26,5 +26,3 @@ export default function whiteButton(iconSrc, text, callback) {
     return btnWhite;
 
 }
-
-
