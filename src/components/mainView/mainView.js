@@ -6,9 +6,9 @@ import { gameMode as createGameMode, getGameModeQuestion } from '../gameMode/gam
 import { createGameRulesComponent } from '../gameRules/gameRules';
 import redButton from '../redButton/redButton';
 import whiteButton from '../whiteButton/whiteButton';
-import toggleModeRulesVisibility from '../../services/game/toggleModeRulesVisibility';
+import  { toggleGameRulesVisibility }  from '../../services/game/toggleGameRulesVisibility';
 
-function createWrapperForComponnets(className, nodeName) {
+function createWrapperForComponnet(className, nodeName) {
   if(typeof className !== 'string' && className.length < 2) throw new Error('An error occurred while create wrapper for components: argument className have to be a string type and have a length of at least 2');
   if(typeof className !== 'string' && className.length < 2) throw new Error('An error occurred while create wrapper for components: argument className have to be a string type and have a length of at least 2');
 
@@ -36,7 +36,7 @@ function createComponentsData(imgData, gameMode, answer) {
         {component: createImgElementPeopleMode(imgData), containerClassName: 'image-container', containerNodeName: 'div'},
         {component: createGameMode(getGameModeQuestion(gameMode)), containerClassName: 'game-mode-container', containerNodeName: 'div'},
         {component: createGameRulesComponent(gameMode, answer), containerClassName: 'mode-rules-container', containerNodeName: 'div'},
-        {component: whiteButton('../../static/assets/ui/icons/contacts_24px.png', 'Hall of fame', toggleModeRulesVisibility), containerClassName: 'btn-container', containerNodeName: 'div'},
+        {component: whiteButton('../../static/assets/ui/icons/contacts_24px.png', 'Hall of fame', toggleGameRulesVisibility), containerClassName: 'btn-container', containerNodeName: 'div'},
         {component: redButton('Play the game'), containerClassName: 'btn-container', containerNodeName: 'div'},
       ],
     },
@@ -50,10 +50,10 @@ function getComponentsForMainView(componentsData) {
   if(!Array.isArray(componentsData)) throw new Error('An error occurred while get components for main view: argument componentsData is not an array');
 
   const componentsForMainView = componentsData.map(({ nodeName, className, children }) => {
-    const wrapper = createWrapperForComponnets(className, nodeName);
+    const wrapper = createWrapperForComponnet(className, nodeName);
 
     children.forEach(({component, containerClassName, containerNodeName}) => {
-      const container = createWrapperForComponnets(containerClassName, containerNodeName);
+      const container = createWrapperForComponnet(containerClassName, containerNodeName);
       container.appendChild(component);
       wrapper.appendChild(container);
     });
