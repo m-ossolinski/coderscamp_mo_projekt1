@@ -10,5 +10,4 @@ export function toggleButtonText(modeRulesClassList) {
     btnIcon.setAttribute('src', '../../static/assets/ui/icons/contacts_24px.png');
     buttonText.textContent = 'Hall of fame';
   }
-
 }

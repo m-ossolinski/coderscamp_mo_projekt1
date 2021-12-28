@@ -22,5 +22,4 @@ export default function whiteButton(iconSrc, text, callback) {
   btnWhite.onclick = callback;
 
   return btnWhite;
-
 }

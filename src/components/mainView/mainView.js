@@ -16,7 +16,6 @@ function createWrapperForComponnet(className, nodeName) {
   componentWrapper.classList.add(className);
 
   return componentWrapper;
-
 }
 
 function prepareMainViewComponents(imgData, gameMode, answer) {
@@ -43,7 +42,6 @@ function prepareMainViewComponents(imgData, gameMode, answer) {
   ];
 
   return componentsData;
-
 }
 
 function getComponentsForMainView(componentsData) {
@@ -62,7 +60,6 @@ function getComponentsForMainView(componentsData) {
   });
 
   return componentsForMainView;
-
 }
 
 export function createMainView(imgData, gameRulesData) {
@@ -81,5 +78,4 @@ export function createMainView(imgData, gameRulesData) {
   });
 
   return mainViewComponent;
-
 }
