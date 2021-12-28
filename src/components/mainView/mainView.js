@@ -8,7 +8,7 @@ import redButton from '../redButton/redButton';
 import whiteButton from '../whiteButton/whiteButton';
 import  { toggleGameRulesVisibility }  from '../../services/game/toggleGameRulesVisibility';
 
-function createWrapperForComponnet(className, nodeName) {
+function createWrapperForComponent(className, nodeName) {
   if(typeof className !== 'string' && className.length < 2) throw new Error('An error occurred while create wrapper for components: argument className have to be a string type and have a length of at least 2');
   if(typeof className !== 'string' && className.length < 2) throw new Error('An error occurred while create wrapper for components: argument className have to be a string type and have a length of at least 2');
 
@@ -48,10 +48,10 @@ function getComponentsForMainView(componentsData) {
   if(!Array.isArray(componentsData)) throw new Error('An error occurred while get components for main view: argument componentsData is not an array');
 
   const componentsForMainView = componentsData.map(({ nodeName, className, children }) => {
-    const wrapper = createWrapperForComponnet(className, nodeName);
+    const wrapper = createWrapperForComponent(className, nodeName);
 
     children.forEach(({component, containerClassName, containerNodeName}) => {
-      const container = createWrapperForComponnet(containerClassName, containerNodeName);
+      const container = createWrapperForComponent(containerClassName, containerNodeName);
       container.appendChild(component);
       wrapper.appendChild(container);
     });
