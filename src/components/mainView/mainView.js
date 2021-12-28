@@ -19,7 +19,7 @@ function createWrapperForComponnet(className, nodeName) {
 
 }
 
-function createComponentsData(imgData, gameMode, answer) {
+function prepareMainViewComponents(imgData, gameMode, answer) {
   const componentsData = [
     {
       nodeName: 'nav',
@@ -74,7 +74,7 @@ export function createMainView(imgData, gameRulesData) {
   const mainViewComponent = document.createElement('div');
   mainViewComponent.classList.add('main-view');
 
-  const mainViewComponents = getComponentsForMainView(createComponentsData(imgData, gameMode, answer));
+  const mainViewComponents = getComponentsForMainView(prepareMainViewComponents(imgData, gameMode, answer));
 
   mainViewComponents.forEach(component => {
     mainViewComponent.appendChild(component);
