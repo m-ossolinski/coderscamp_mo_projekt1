@@ -1,25 +1,22 @@
 import './mainView.css';
-
 import createLogo from '../swLogo/swLogo';
-import {createMainMenu} from '../mainMenu/mainMenu';
+import { createMainMenu } from '../mainMenu/mainMenu';
 import createImgElementPeopleMode from '../recognitionImg/ImgModePeople/ImgModePeople';
-import {gameMode as createGameMode, getGameModeQuestion} from '../gameMode/gameMode';
-import {createGameRulesComponent} from '../gameRules/gameRules';
+import { gameMode as createGameMode, getGameModeQuestion } from '../gameMode/gameMode';
+import { createGameRulesComponent } from '../gameRules/gameRules';
 import redButton from '../redButton/redButton';
 import whiteButton from '../whiteButton/whiteButton';
 import toggleModeRulesVisibility from '../../services/game/toggleModeRulesVisibility';
 
-function createWrapper(className, nodeName) {
-  const isCorrectClassName = typeof className === 'string' && className.length > 2;
-  if(!isCorrectClassName) throw new Error('Argument className is invalid');
+function createWrapperForComponnets(className, nodeName) {
+  if(typeof className !== 'string' && className.length < 2) throw new Error('An error occurred while create wrapper for components: argument className have to be a string type and have a length of at least 2');
+  if(typeof className !== 'string' && className.length < 2) throw new Error('An error occurred while create wrapper for components: argument className have to be a string type and have a length of at least 2');
 
-  const isCorrectNodeName = typeof className === 'string' && className.length > 2;
-  if(!isCorrectNodeName) throw new Error('Argument nodeName is invalid');
+  const componentWrapper = document.createElement(nodeName);
+  componentWrapper.classList.add(className);
 
-  const container = document.createElement(nodeName);
-  container.classList.add(className);
+  return componentWrapper;
 
-  return container;
 }
 
 function createComponentsData(imgData, gameMode, answer) {
@@ -46,17 +43,17 @@ function createComponentsData(imgData, gameMode, answer) {
   ];
 
   return components;
+
 }
 
-function getComponents(componentsData) {
-  const isArray = Array.isArray(componentsData);
-  if(!isArray) throw new Error('componentsData is not an array');
+function getComponentsForMainView(componentsData) {
+  if(!Array.isArray(componentsData)) throw new Error('An error occurred while get components for main view: argument componentsData is not an array');
 
-  const componnets = componentsData.map(({nodeName, className, children}) => {
-    const wrapper = createWrapper(className, nodeName);
+  const componentsForMainView = componentsData.map(({ nodeName, className, children }) => {
+    const wrapper = createWrapperForComponnets(className, nodeName);
 
     children.forEach(({component, containerClassName, containerNodeName}) => {
-      const container = createWrapper(containerClassName, containerNodeName);
+      const container = createWrapperForComponnets(containerClassName, containerNodeName);
       container.appendChild(component);
       wrapper.appendChild(container);
     });
@@ -64,26 +61,25 @@ function getComponents(componentsData) {
     return wrapper;
   });
 
-  return componnets;
+  return componentsForMainView;
+
 }
 
-export default function createMainView(imgData, gameRulesData) {
-
-  const isCorrectImageData = typeof imgData === 'string';
-  if(!isCorrectImageData) throw new Error('Argument imgData have to be a string');
+export function createMainView(imgData, gameRulesData) {
+  if(typeof imgData !== 'string') throw new Error('An error occurred while create main view: argument imgData have to be a string');
 
   const {gameMode, answer} = gameRulesData;
-  const isCorrectGameRulesData = typeof (gameMode + answer) === 'string';
-  if(!isCorrectGameRulesData) throw new Error('Argument gameRulesData have to be a string');
+  if(typeof gameMode !== 'string' && typeof answer !== 'string') throw new Error('An error occurred while create main view: argument gameRulesData have to be a string');
 
   const mainViewComponent = document.createElement('div');
   mainViewComponent.classList.add('main-view');
 
-  const components = getComponents(createComponentsData(imgData, gameMode, answer));
-  console.log(components);
-  components.forEach(component => {
+  const mainViewComponents = getComponentsForMainView(createComponentsData(imgData, gameMode, answer));
+
+  mainViewComponents.forEach(component => {
     mainViewComponent.appendChild(component);
   });
 
   return mainViewComponent;
+
 }

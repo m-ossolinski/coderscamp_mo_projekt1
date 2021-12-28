@@ -1,5 +1,4 @@
-export default function changeButtonText(modeRulesClassList) {
-  console.log(modeRulesClassList);
+export function toggleButtonText(modeRulesClassList) {
   const buttonText = document.querySelector('.btnWhite span');
   let btnIcon = document.querySelector('.btnWhite img');
 
@@ -11,4 +10,5 @@ export default function changeButtonText(modeRulesClassList) {
     btnIcon.setAttribute('src', '../../static/assets/ui/icons/contacts_24px.png');
     buttonText.textContent = 'Hall of fame';
   }
+
 }

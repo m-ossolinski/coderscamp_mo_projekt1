@@ -20,8 +20,7 @@ export default function whiteButton(iconSrc, text, callback) {
     }
 
     if (callback) {
-        // btnWhite.onclick = callback;
-        btnWhite.addEventListener('click', callback);
+        btnWhite.onclick = callback;
     }
 
     return btnWhite;
