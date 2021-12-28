@@ -1,5 +1,6 @@
 .main-view {
   width: 95%;
+  padding-top: 3rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 100%;

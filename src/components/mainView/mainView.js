@@ -20,7 +20,7 @@ function createWrapperForComponnet(className, nodeName) {
 }
 
 function createComponentsData(imgData, gameMode, answer) {
-  const components = [
+  const componentsData = [
     {
       nodeName: 'nav',
       className: 'navigation',
@@ -42,7 +42,7 @@ function createComponentsData(imgData, gameMode, answer) {
     },
   ];
 
-  return components;
+  return componentsData;
 
 }
 
