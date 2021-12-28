@@ -1,3 +1,5 @@
+import generateQuestionForTheGameMode from '../game/generateQuestions';
+
 export default class Player {
     constructor(playerName, points) {
         this.playerName = playerName;
@@ -13,11 +15,8 @@ export default class Player {
         localStorage.setItem('points', this.points);
     }
 
-    getQuestion(callback, gameMode) {
-        const isCallback = typeof callback == 'function';
-        if(!isCallback) throw new Error('Argument callback have to be a function');
-
-        const {answers, rightAnswer: correctAnswers, image} = callback(gameMode);
+    getQuestion(gameMode) {
+        const {answers, rightAnswer: correctAnswers, image} = generateQuestionForTheGameMode(gameMode);
 
         this.question.push(gameMode);
         this.answers.push({answers, image});
