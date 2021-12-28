@@ -19,7 +19,8 @@ export default class Player {
         const {answers, rightAnswer: correctAnswers, image} = generateQuestionForTheGameMode(gameMode);
 
         this.question.push(gameMode);
-        this.answers.push({answers, image});
+        this.answers.push({ answers, image });
         this.correctAnswers.push(correctAnswers);
     }
+
 }
