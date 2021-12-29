@@ -164,7 +164,12 @@ export const createMainView = async (mode = 'people') => {
 
   mainViewComponent.appendChild(navigation);
 
+  const spinner = document.querySelector('.sk-circle');
+  spinner.classList.remove('hide');
+
   const gamePanel = await createGamePanel(mode);
+
+  spinner.classList.add('hide');
 
   mainViewComponent.appendChild(gamePanel);
 
