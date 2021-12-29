@@ -149,8 +149,10 @@ function getComponentsForMain(componentsData) {
 export const createGamePanel = async (mode) => {
   const question = await generateQuestionForTheGameMode(mode);
 
+  console.log(question);
+
   const mainComponents = getComponentsForMain(
-    prepareMainData(question.image, mode, question.answer)
+    prepareMainData(question.image, mode, question.rightAnswer)
   );
 
   return mainComponents;
