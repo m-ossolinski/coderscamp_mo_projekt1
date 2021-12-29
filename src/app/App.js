@@ -14,8 +14,7 @@ export const App = async ({ options }) => {
   const swquiz = document.getElementById('swquiz-app');
   const question = await generateQuestionForTheGameMode('people');
 
-  const gameRules = {gameMode: 'people', answer: question.rightAnswer};
+  const gameRules = { gameMode: 'people', answer: question.rightAnswer };
 
   swquiz.appendChild(createMainView(question.image, gameRules));
-
 };
