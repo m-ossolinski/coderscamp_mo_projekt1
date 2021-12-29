@@ -1,4 +1,5 @@
 import './mainView.css';
+import generateQuestionForTheGameMode from '../../services/game/generateQuestions';
 import createLogo from '../swLogo/swLogo';
 import { createMainMenu } from '../mainMenu/mainMenu';
 import createImgElementPeopleMode from '../recognitionImg/ImgModePeople/ImgModePeople';
@@ -11,6 +12,7 @@ import redButton from '../redButton/redButton';
 import whiteButton from '../whiteButton/whiteButton';
 import { toggleGameRulesVisibility } from '../../services/game/toggleGameRulesVisibility';
 import { showGamePanel } from '../../services/game/showGamePanel';
+import { selectGameMode } from '../../services/game/selectGameMode';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -28,8 +30,8 @@ function createWrapperForComponent(className, nodeName) {
   return componentWrapper;
 }
 
-function prepareMainViewComponents(imgData, gameMode, answer) {
-  const componentsData = [
+function prepareNavigationData() {
+  return [
     {
       nodeName: 'nav',
       className: 'navigation',
@@ -40,12 +42,17 @@ function prepareMainViewComponents(imgData, gameMode, answer) {
           containerNodeName: 'div'
         },
         {
-          component: createMainMenu(),
+          component: createMainMenu(selectGameMode),
           containerClassName: 'main-menu-container',
           containerNodeName: 'div'
         }
       ]
-    },
+    }
+  ];
+}
+
+function prepareMainData(imgData, gameMode, answer) {
+  return [
     {
       nodeName: 'main',
       className: 'main',
@@ -82,17 +89,14 @@ function prepareMainViewComponents(imgData, gameMode, answer) {
       ]
     }
   ];
-
-  return componentsData;
 }
 
-function getComponentsForMainView(componentsData) {
+function getComponentsForNavigation(componentsData) {
   if (!Array.isArray(componentsData))
     throw new Error(
       'An error occurred while get components for main view: argument componentsData is not an array'
     );
-
-  const componentsForMainView = componentsData.map(
+  const componentsForNavigation = componentsData.map(
     ({ nodeName, className, children }) => {
       const wrapper = createWrapperForComponent(className, nodeName);
 
@@ -111,31 +115,58 @@ function getComponentsForMainView(componentsData) {
     }
   );
 
-  return componentsForMainView;
+  return componentsForNavigation[0];
 }
 
-export function createMainView(imgData, gameRulesData) {
-  if (typeof imgData !== 'string')
+function getComponentsForMain(componentsData) {
+  if (!Array.isArray(componentsData))
     throw new Error(
-      'An error occurred while create main view: argument imgData have to be a string'
+      'An error occurred while get components for main view: argument componentsData is not an array'
     );
 
-  const { gameMode, answer } = gameRulesData;
-  if (typeof gameMode !== 'string' && typeof answer !== 'string')
-    throw new Error(
-      'An error occurred while create main view: argument gameRulesData have to be a string'
-    );
+  const componentsForMain = componentsData.map(
+    ({ nodeName, className, children }) => {
+      const wrapper = createWrapperForComponent(className, nodeName);
 
+      children.forEach(
+        ({ component, containerClassName, containerNodeName }) => {
+          const container = createWrapperForComponent(
+            containerClassName,
+            containerNodeName
+          );
+          container.appendChild(component);
+          wrapper.appendChild(container);
+        }
+      );
+
+      return wrapper;
+    }
+  );
+
+  return componentsForMain[0];
+}
+
+export const createGamePanel = async (mode) => {
+  const question = await generateQuestionForTheGameMode(mode);
+
+  const mainComponents = getComponentsForMain(
+    prepareMainData(question.image, mode, question.answer)
+  );
+
+  return mainComponents;
+};
+
+export const createMainView = async (mode = 'people') => {
   const mainViewComponent = document.createElement('div');
   mainViewComponent.classList.add('main-view');
 
-  const mainViewComponents = getComponentsForMainView(
-    prepareMainViewComponents(imgData, gameMode, answer)
-  );
+  const navigation = getComponentsForNavigation(prepareNavigationData());
 
-  mainViewComponents.forEach((component) => {
-    mainViewComponent.appendChild(component);
-  });
+  mainViewComponent.appendChild(navigation);
+
+  const gamePanel = await createGamePanel(mode);
+
+  mainViewComponent.appendChild(gamePanel);
 
   return mainViewComponent;
-}
+};
