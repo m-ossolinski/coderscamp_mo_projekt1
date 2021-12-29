@@ -1,0 +1,24 @@
+.main-guiz-game {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  grid-template-rows: 9rem 1fr;
+  grid-template-areas:
+    'img game-mode'
+    'img answers-cards';
+  row-gap: 4rem;
+  column-gap: 6rem;
+  padding: 2rem;
+}
+
+.image-container {
+  grid-area: img;
+}
+
+.game-mode-container {
+  grid-area: game-mode;
+}
+
+.answers-card-container {
+  grid-area: answers-cards;
+}
