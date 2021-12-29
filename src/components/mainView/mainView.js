@@ -94,7 +94,7 @@ function prepareMainData(imgData, gameMode, answer) {
 function getComponentsForNavigation(componentsData) {
   if (!Array.isArray(componentsData))
     throw new Error(
-      'An error occurred while get components for main view: argument componentsData is not an array'
+      'An error occurred while get components for navigation: argument componentsData is not an array'
     );
   const componentsForNavigation = componentsData.map(
     ({ nodeName, className, children }) => {
