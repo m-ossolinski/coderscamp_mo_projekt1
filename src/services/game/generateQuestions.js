@@ -9,7 +9,15 @@ const getRandomNumber = (minInt, maxInt) => {
 };
 
 const getRangeOfIds = async (gameMode) => {
-  return await fetchIdsFromAPI(gameMode);
+  const ids = await fetchIdsFromAPI(gameMode);
+  let result = ids;
+  if (gameMode === 'starships') {
+    result = ids.filter((item) => item > 3 && item !== 17 && item <= 48);
+  }
+  if (gameMode === 'vehicles') {
+    result = ids.filter((item) => item <= 42);
+  }
+  return result;
 };
 
 const generateAnswerNumbers = (arrOfNumbers) => {

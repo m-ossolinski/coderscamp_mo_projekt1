@@ -3,6 +3,7 @@
   height: 100%;
   font-family: inherit;
   padding: 1rem;
+  cursor: pointer;
 }
 .btn--red {
   background: rgba(255, 0, 0, 0.8);
