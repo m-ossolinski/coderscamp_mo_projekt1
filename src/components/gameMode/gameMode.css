@@ -1,9 +1,9 @@
 .question {
   width: 100%;
-  line-height: 9rem;
+  padding: 2rem;
   background-color: #fff;
   color: #000;
-  /* padding: 1rem; */
+  text-align: center;
   font-weight: 600;
   font-size: 3.5rem;
   display: flex;
@@ -12,4 +12,23 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 4px 40px rgba(255, 0, 0, 0.9),
     inset 4px 5px 4px rgba(0, 0, 0, 0.5);
   grid-area: game;
+}
+
+@media screen and (max-width: 1300px) {
+  .question {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .question {
+    font-size: 3.5rem;
+    line-height: 3rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .question {
+    font-size: 2.5rem;
+  }
 }

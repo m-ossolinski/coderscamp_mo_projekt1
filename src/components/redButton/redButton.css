@@ -17,3 +17,15 @@
   text-align: center;
   color: #ffffff;
 }
+
+@media screen and (max-width: 1300px) {
+  .btn--label {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .btn--label {
+    font-size: 5rem;
+  }
+}
