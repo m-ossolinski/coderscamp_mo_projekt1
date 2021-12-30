@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import createLogo from '../components/swLogo/swLogo';
 import generateQuestionForTheGameMode from '../services/game/generateQuestions';
 import { createMainMenu } from '../components/mainMenu/mainMenu';
@@ -20,4 +21,12 @@ export const App = async ({ options }) => {
 
     // swquiz.appendChild(createImgElementPeopleMode(question.image));
     // swquiz.appendChild(createGameRulesComponent('people', question.rightAnswer));
+=======
+import { createMainView } from '../components/mainView/mainView';
+
+export const App = async ({ options }) => {
+  const swquiz = document.getElementById('swquiz-app');
+
+  swquiz.appendChild(await createMainView());
+>>>>>>> origin/main
 };
