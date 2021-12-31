@@ -4,3 +4,9 @@
   cursor: pointer;
   grid-area: logo;
 }
+
+@media screen and (max-width: 1000px) {
+  .swLogo {
+    width: 50%;
+  }
+}
