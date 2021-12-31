@@ -12,7 +12,9 @@ const getRangeOfIds = async (gameMode) => {
   const ids = await fetchIdsFromAPI(gameMode);
   let result = ids;
   if (gameMode === 'starships') {
-    result = ids.filter((item) => item > 3 && item !== 17 && item <= 48);
+    result = ids.filter(
+      (item) => item > 3 && item !== 17 && item !== 32 && item <= 48
+    );
   }
   if (gameMode === 'vehicles') {
     result = ids.filter((item) => item <= 42);
