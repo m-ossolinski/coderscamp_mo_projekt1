@@ -132,7 +132,7 @@ const createAnswersHeading = () => {
 };
 
 const displayResultsTable = (answersList) => {
-  const resultsTable = document.createElement('resultsTable');
+  const resultsTable = document.createElement('table');
   resultsTable.classList.add('resultsTable');
   const header = document.createElement('thead');
   header.classList.add('resultsTable_header');

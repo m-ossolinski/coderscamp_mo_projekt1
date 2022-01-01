@@ -9,7 +9,7 @@ import {
 } from '../gameMode/gameMode';
 import { createGameRulesComponent } from '../gameRules/gameRules';
 import redButton from '../redButton/redButton';
-import whiteButton from '../whiteButton/whiteButton';
+import { whiteButton } from '../whiteButton/whiteButton';
 import { toggleGameRulesVisibility } from '../../services/game/toggleGameRulesVisibility';
 import { showGamePanel } from '../../services/game/showGamePanel';
 import { selectGameMode } from '../../services/game/selectGameMode';
