@@ -13,6 +13,7 @@ import { whiteButton } from '../whiteButton/whiteButton';
 import { toggleGameRulesVisibility } from '../../services/game/toggleGameRulesVisibility';
 import { showGamePanel } from '../../services/game/showGamePanel';
 import { selectGameMode } from '../../services/game/selectGameMode';
+import { getRanking } from '../ranking/ranking';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -65,6 +66,11 @@ function prepareMainData(imgData, gameMode, answer) {
         {
           component: createGameMode(getGameModeQuestion(gameMode)),
           containerClassName: 'game-mode-container',
+          containerNodeName: 'div'
+        },
+        {
+          component: getRanking(),
+          containerClassName: 'ranking-container',
           containerNodeName: 'div'
         },
         {
