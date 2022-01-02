@@ -1,7 +1,7 @@
 import './answersCard.css';
 import isAnswerCorrect from '../../services/game/isAnswerCorrect';
 
-export function answersCard(possibleAnswers, correctAnswer, savePlayerAnswers) {
+export function createAnswersCards(possibleAnswers, correctAnswer, savePlayerAnswers) {
   if (!Array.isArray(possibleAnswers))
     throw new Error('possibleAnswers array is not an array');
   if (possibleAnswers.length === 0)
@@ -11,9 +11,8 @@ export function answersCard(possibleAnswers, correctAnswer, savePlayerAnswers) {
   if (typeof savePlayerAnswers !== 'function')
     throw new Error('savePlayerAnswers should be a function');
 
-  const swquiz = document.getElementById('swquiz-app');
-  const wrapper = document.createElement('div');
-  wrapper.setAttribute('class', 'answer__wrapper');
+  const answersCardsComponent = document.createElement('div');
+  answersCardsComponent.setAttribute('class', 'answer__wrapper');
 
   possibleAnswers.forEach((answer) => {
     const button = document.createElement('button');
@@ -25,8 +24,7 @@ export function answersCard(possibleAnswers, correctAnswer, savePlayerAnswers) {
     label.setAttribute('class', 'answer__button--label');
 
     button.appendChild(label);
-    wrapper.appendChild(button);
-    swquiz.appendChild(wrapper);
+    answersCardsComponent.appendChild(button);
 
     button.addEventListener('click', () => {
       const selectedAnswer = button.textContent;
@@ -40,4 +38,6 @@ export function answersCard(possibleAnswers, correctAnswer, savePlayerAnswers) {
       }
     });
   });
+
+  return answersCardsComponent;
 }
