@@ -1,10 +1,18 @@
 import './whiteButton.css';
 
-export default function whiteButton(iconSrc, text, callback) {
-
-  if(typeof iconSrc !== 'string') throw new Error('An error occurred while creating white button: argument iconSrc have to be a string type');
-  if(typeof text !== 'string') throw new Error('An error occurred while creating white button: argument text have to be a string type');
-  if(typeof callback !== 'function') throw new Error('An error occurred while creating white button: argument callback have to be a function');
+export const whiteButton = (iconSrc, text, callback) => {
+  if (typeof iconSrc !== 'string')
+    throw new Error(
+      'An error occurred while creating white button: argument iconSrc have to be a string type'
+    );
+  if (typeof text !== 'string')
+    throw new Error(
+      'An error occurred while creating white button: argument text have to be a string type'
+    );
+  if (typeof callback !== 'function')
+    throw new Error(
+      'An error occurred while creating white button: argument callback have to be a function'
+    );
 
   const btnWhite = document.createElement('button');
   btnWhite.className = 'btnWhite';
@@ -22,4 +30,4 @@ export default function whiteButton(iconSrc, text, callback) {
   btnWhite.onclick = callback;
 
   return btnWhite;
-}
+};

@@ -28,6 +28,10 @@ body {
   opacity: 0;
 }
 
+.uncover {
+  opacity: 1;
+}
+
 .hide {
   display: none;
 }
