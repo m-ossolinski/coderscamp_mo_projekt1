@@ -1,6 +1,6 @@
 .ranking {
   width: 100%;
-  height: min-content;
+  height: 100%;
   background-color: white;
   padding: 4.3rem;
   grid-area: game;
@@ -24,7 +24,7 @@
 }
 
 .ranking_text {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: 600;
 }
 

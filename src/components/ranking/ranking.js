@@ -1,14 +1,8 @@
 import './ranking.css';
 
-const sortedArr = [
-  { player: 'Anna', answers: 20, questions: 30 },
-  { player: 'Tomek', answers: 10, questions: 20 },
-  { player: 'Zenon', answers: 3, questions: 20 }
-];
-
-const getRankingTable = (sortedArr) => {
-  const rankingContent = document.createElement('table');
-  rankingContent.classList.add('ranking_content');
+const getRankingTable = (playersRankingData) => {
+  const rankingTableContent = document.createElement('table');
+  rankingTableContent.classList.add('ranking_content');
 
   const header = document.createElement('thead');
   header.classList.add('ranking_content', 'content_header');
@@ -24,12 +18,17 @@ const getRankingTable = (sortedArr) => {
   });
 
   header.appendChild(headerRow);
-  rankingContent.appendChild(headerRow);
+  rankingTableContent.appendChild(headerRow);
 
   const contentTableBody = document.createElement('tbody');
   contentTableBody.classList.add('content_body');
 
-  sortedArr.forEach((player, index) => {
+  if (playersRankingData === undefined || playersRankingData === '') {
+    playersRankingData = [
+      { player: 'That can be you', answers: 20, questions: 20 }
+    ];
+  }
+  playersRankingData.forEach((player, index) => {
     const markup = `
     <tr> 
       <td class="content_body-row"> ${index + 1}${
@@ -40,13 +39,13 @@ const getRankingTable = (sortedArr) => {
         player.answers
       } / ${player.questions} </td>
     </tr>`;
-    rankingContent.insertAdjacentHTML('beforeend', markup);
+    rankingTableContent.insertAdjacentHTML('beforeend', markup);
   });
 
-  return rankingContent;
+  return rankingTableContent;
 };
 
-export const getRanking = (sortedArray) => {
+export const getRanking = (playersRankingData) => {
   const rankingWrapper = document.createElement('div');
   rankingWrapper.classList.add('ranking');
 
@@ -65,7 +64,7 @@ export const getRanking = (sortedArray) => {
   rankingTitle.appendChild(rankingTitleText);
 
   rankingWrapper.appendChild(rankingTitle);
-  const ranking = getRankingTable(sortedArr);
+  const ranking = getRankingTable(playersRankingData);
   rankingWrapper.appendChild(ranking);
 
   return rankingWrapper;

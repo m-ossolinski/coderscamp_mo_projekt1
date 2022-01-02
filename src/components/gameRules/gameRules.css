@@ -1,6 +1,6 @@
 .mode-rules {
   width: 100%;
-  height: min-content;
+  height: 100%;
   background-color: white;
   padding: 4rem;
   grid-area: game;
