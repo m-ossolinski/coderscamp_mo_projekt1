@@ -10,6 +10,10 @@ export function Timer() {
     const timerArea = document.createElement('div');
     timerArea.className = 'timerArea';
 
+    const initialProgressValue = 100;
+    timerArea.appendChild(LightsaberTimer(initialProgressValue));
+    timerArea.appendChild(TextTimer(minutes, seconds));
+
     let interval = window.setInterval(function () {
         seconds--;
 
@@ -17,7 +21,7 @@ export function Timer() {
             minutes--;
             seconds = 59;
         }
-        if (minutes === 0 && seconds === 0) {
+        if (minutes === 0 && seconds === -1) {
             return clearInterval(interval);
         }
 

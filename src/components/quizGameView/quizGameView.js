@@ -2,6 +2,7 @@ import './quizGameView.css';
 import createImgElementPeopleMode from '../recognitionImg/ImgModePeople/ImgModePeople';
 import { gameMode as createGameMode, getGameModeQuestion } from '../gameMode/gameMode';
 import { createAnswersCards} from '../answersCard/answersCard';
+import {Timer} from '../Timer/Timer';
 import generateQuestionForTheGameMode from '../../services/game/generateQuestions';
 
 function createWrapperForComponent(className, nodeName) {
@@ -30,9 +31,15 @@ export async function createQuizGameView(gameMode = 'people') {
   const answersCardsWrapper = createWrapperForComponent('answers-card-container', 'div');
   answersCardsWrapper.appendChild(createAnswersCards(answers, rightAnswer, () => {}));
 
+  const timerContainer = createWrapperForComponent('timer-container', 'div');
+  timerContainer.appendChild(Timer());
+
   quizGameView.appendChild(imageWrapper);
   quizGameView.appendChild(gameModeWrapper);
   quizGameView.appendChild(answersCardsWrapper);
+  quizGameView.appendChild(timerContainer);
 
   return quizGameView;
 }
+
+// displayMod

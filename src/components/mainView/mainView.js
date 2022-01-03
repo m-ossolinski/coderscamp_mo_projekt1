@@ -56,7 +56,7 @@ function prepareMainData(imgData, gameMode, answer) {
   return [
     {
       nodeName: 'main',
-      className: 'main',
+      className: 'main-game-panel',
       children: [
         {
           component: createImgElementPeopleMode(imgData),

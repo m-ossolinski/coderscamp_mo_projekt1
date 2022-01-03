@@ -1,24 +1,38 @@
 .main-guiz-game {
-  grid-area: main;
+  max-height: 70%;
+  width: 100%;
   display: grid;
-  grid-template-columns: 30% 1fr;
-  grid-template-rows: 9rem 1fr;
+  grid-template-columns: 2fr 6fr;
+  grid-template-rows: 1fr 7fr 2fr;
   grid-template-areas:
     'img game-mode'
-    'img answers-cards';
+    'img answers-cards'
+    'timer timer';
   row-gap: 4rem;
   column-gap: 6rem;
-  padding: 2rem;
 }
 
-.image-container {
+.main-guiz-game .image-container {
   grid-area: img;
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
-.game-mode-container {
+.main-guiz-game .game-mode-container {
   grid-area: game-mode;
 }
 
 .answers-card-container {
   grid-area: answers-cards;
+}
+
+.timer-container {
+  grid-area: timer;
+  align-self: end;
+}
+
+@media screen and (max-width: 1000px) {
+
 }

@@ -1,22 +1,19 @@
 .main-view {
-  padding: 8rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 3rem;
+  justify-content: space-between;
+  height: 100%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .navigation {
-  grid-area: nav;
-  width: 100%;
   display: grid;
   grid-template-columns: 30% 1fr;
   column-gap: 6rem;
-  padding: 2rem;
-  margin-top: 2rem;
   justify-items: center;
+  /* margin-top: 3rem; */
 }
 
 .logo-container {
@@ -32,26 +29,28 @@
   justify-content: center;
 }
 
-.main {
-  grid-area: main;
+.main-game-panel {
+  padding: 2rem 0;
+  margin-bottom: 3rem;
   display: grid;
-  grid-template-columns: 30% 1fr 1fr;
-  grid-template-rows: 9rem 1fr 15%;
+  grid-template-columns: 2fr 3fr 3fr;
+  grid-template-rows: 8rem 1fr 13%;
   grid-template-areas:
     'img game-mode game-mode'
     'img game-rules game-rules'
     'img btn-white btn-red';
   row-gap: 4rem;
-  column-gap: 6rem;
-  padding: 2rem;
+  column-gap: 4rem;
   justify-items: center;
 }
 
-.image-container {
+.main-game-panel .image-container {
   grid-area: img;
+  width: 100%;
+  position: relative;
 }
 
-.game-mode-container {
+.main-game-panel .game-mode-container {
   width: 100%;
   grid-area: game-mode;
 }
@@ -82,8 +81,12 @@
 
 @media screen and (max-width: 1300px) {
   .main-view {
-    padding: 3rem;
+    padding: 3rem 0;
   }
+}
+
+@media screen and (max-width: 1200px) {
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -98,8 +101,7 @@
     flex-direction: column;
   }
 
-  .main {
-    grid-area: main;
+  .main-game-panel {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 10% 1fr 10% 10%;
