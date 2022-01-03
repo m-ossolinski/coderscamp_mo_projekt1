@@ -3,6 +3,64 @@ import { TextTimer } from '../TextTimer/TextTimer';
 import { LightsaberTimer } from '../LightsaberTimer/LightsaberTimer';
 import { convertTimeToSeconds } from '../../utils/helpers/convertTimeToSeconds';
 import { modal } from '../modalWindow/modal';
+import { gameResultsModal } from '../../components/modalWindowContent/modalWindowContent';
+import { Game } from '../../services/game/game';
+
+// * Example modal data
+const answersList = [
+  {
+    id: 1,
+    img: '../../../static/assets/img/modes/people/13.jpg',
+    correctAnswer: 'Chewbacca',
+    human: {
+      answer: 'Chewbacca',
+      isCorrect: true
+    },
+    autoPlayer: {
+      answer: 'Darth Vader',
+      isCorrect: false
+    }
+  },
+  {
+    id: 2,
+    img: '../../../static/assets/img/modes/people/7.jpg',
+    correctAnswer: 'Beru Whitesun lars',
+    human: {
+      answer: 'Beru Whitesun lars',
+      isCorrect: true
+    },
+    autoPlayer: {
+      answer: 'Darth Vader',
+      isCorrect: false
+    }
+  },
+  {
+    id: 3,
+    img: '../../../static/assets/img/modes/people/19.jpg',
+    correctAnswer: 'Jek Tono Porkins',
+    human: {
+      answer: 'Chewbacca',
+      isCorrect: false
+    },
+    autoPlayer: {
+      answer: 'Jek Tono Porkins',
+      isCorrect: true
+    }
+  },
+  {
+    id: 4,
+    img: '../../../static/assets/img/modes/people/26.jpg',
+    correctAnswer: 'Lobot',
+    human: {
+      answer: 'Lobot',
+      isCorrect: true
+    },
+    autoPlayer: {
+      answer: 'Darth Vader',
+      isCorrect: false
+    }
+  }
+];
 
 export function Timer() {
     let minutes = 1;
@@ -27,7 +85,7 @@ export function Timer() {
         seconds = 59;
       }
       if (minutes === 0 && seconds === 0) {
-        modal();
+        modal(gameResultsModal(answersList, 10));
         clearInterval(intervalId);
         intervalId = null;
       }

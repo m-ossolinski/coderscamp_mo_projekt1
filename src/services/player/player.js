@@ -1,9 +1,9 @@
 import generateQuestionForTheGameMode from '../game/generateQuestions';
 
 export default class Player {
-    constructor(playerName, points) {
-        this.playerName = playerName;
-        this.points = points;
+    constructor() {
+        this.playerName;
+        this.points = 0;
         this.id = Date.now();
         this.question = [];
         this.answers = [];

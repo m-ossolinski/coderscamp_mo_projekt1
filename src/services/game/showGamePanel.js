@@ -8,7 +8,7 @@ export const showGamePanel = async () => {
   startGamePanel.remove();
   spinner.classList.remove('hide');
 
-  const spinnerVisibilityTime = 1.5;
+  const spinnerVisibilityTime = 1500;
 
   setTimeout(async () => {
     mainView.appendChild(await createQuizGameView());
