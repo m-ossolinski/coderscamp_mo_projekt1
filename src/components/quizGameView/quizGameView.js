@@ -29,7 +29,7 @@ export async function createQuizGameView(gameMode = 'people') {
   gameModeWrapper.appendChild(createGameMode(getGameModeQuestion(gameMode)));
 
   const answersCardsWrapper = createWrapperForComponent('answers-card-container', 'div');
-  answersCardsWrapper.appendChild(createAnswersCards(answers, rightAnswer, () => {}));
+  answersCardsWrapper.appendChild(createAnswersCards(answers, rightAnswer, () => { console.log('click') }));
 
   const timerContainer = createWrapperForComponent('timer-container', 'div');
   timerContainer.appendChild(Timer());
@@ -42,4 +42,3 @@ export async function createQuizGameView(gameMode = 'people') {
   return quizGameView;
 }
 
-// displayMod
