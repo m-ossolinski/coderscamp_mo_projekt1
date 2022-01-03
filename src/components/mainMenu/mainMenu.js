@@ -37,6 +37,7 @@ function createMainMenu() {
 
   mainMenuItems.forEach((item) => {
     item.addEventListener('click', function () {
+      if(document.querySelector('.main-guiz-game')) return;
       selectGameMode(item);
       mainMenuItems.forEach((item) => item.classList.remove('selected'));
       this.classList.add('selected');
