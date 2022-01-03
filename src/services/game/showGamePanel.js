@@ -8,11 +8,10 @@ export const showGamePanel = async () => {
   startGamePanel.remove();
   spinner.classList.remove('hide');
 
-  const ONE_SECOND_MILLIS = 1000;
-  const SPINNER_VISIBILITY_TIME = ONE_SECOND_MILLIS * 1.5;
+  const spinnerVisibilityTime = 1.5;
 
   setTimeout(async () => {
     mainView.appendChild(await createQuizGameView());
     spinner.classList.add('hide');
-  }, SPINNER_VISIBILITY_TIME);
+  }, spinnerVisibilityTime);
 };
