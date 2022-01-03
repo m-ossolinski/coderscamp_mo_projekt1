@@ -13,7 +13,6 @@
   grid-template-columns: 30% 1fr;
   column-gap: 6rem;
   justify-items: center;
-  /* margin-top: 3rem; */
 }
 
 .logo-container {
@@ -83,10 +82,6 @@
   .main-view {
     padding: 3rem 0;
   }
-}
-
-@media screen and (max-width: 1200px) {
-
 }
 
 @media screen and (max-width: 1000px) {

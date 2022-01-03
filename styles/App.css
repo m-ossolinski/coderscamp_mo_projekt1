@@ -41,8 +41,8 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   #swquiz-app {
-    /* height: auto; */
+    min-height: 100vh;
   }
 }
