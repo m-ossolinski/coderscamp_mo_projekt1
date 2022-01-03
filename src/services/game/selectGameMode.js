@@ -3,7 +3,7 @@ import { createGamePanel } from '../../components/mainView/mainView';
 export const selectGameMode = async (item) => {
   const mode = item.dataset.id;
 
-  const previousGame = document.querySelector('.main');
+  const previousGame = document.querySelector('.main-game-panel');
   previousGame.remove();
 
   const spinner = document.querySelector('.sk-circle');

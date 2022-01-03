@@ -3,7 +3,6 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    height: 11.25rem;
     width: 100%;
     grid-area: timer;
 }

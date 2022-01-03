@@ -1,5 +1,5 @@
 export default class Game {
-  constructor(selectedMode) {
+  constructor(selectedMode = 'people') {
     this.selectedMode = selectedMode;
   }
 }

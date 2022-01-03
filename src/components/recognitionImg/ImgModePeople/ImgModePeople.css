@@ -1,7 +1,15 @@
 .swq_recognitionimg-people {
+  object-fit: cover;
+  height: 100%;
   width: 100%;
-  height: auto;
-  margin: 0 auto;
   border-radius: 1rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 70px rgba(255, 0, 0, 0.9);
+}
+
+@media screen and (max-width: 1000px) {
+  .swq_recognitionimg-people {
+    width: 50%;
+    display: flex;
+    margin: 0 auto;
+  }
 }

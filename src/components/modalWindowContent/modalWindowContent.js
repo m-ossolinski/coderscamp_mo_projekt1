@@ -1,6 +1,6 @@
 import './modalWindowContent.css';
 
-/* EXAMPLE DATA  
+/* EXAMPLE DATA
 
 const answersList = [
   {
@@ -154,7 +154,7 @@ const displayResultsTable = (answersList) => {
 
   answersList.forEach((answer) => {
     const markup = `
-        <tr> 
+        <tr>
           <td> <img src="${answer.img}" class="resultsTable_img"/> </td>
           <td class="resultsTable_answer--${
             answer.human.isCorrect ? 'correct' : 'incorrect'

@@ -24,6 +24,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+#swquiz-app {
+  padding: 0 2rem;
+  height: 100vh;
+}
+
 .cover {
   opacity: 0;
 }
@@ -34,4 +39,11 @@ body {
 
 .hide {
   display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  #swquiz-app {
+    min-height: 100vh;
+    height: auto;
+  }
 }
