@@ -20,7 +20,7 @@ export async function createQuizGameView(gameMode = 'people') {
   const { answers, rightAnswer, image } = question;
 
   const quizGameView = document.createElement('main');
-  quizGameView.classList.add('main-guiz-game');
+  quizGameView.classList.add('main-quiz-game');
 
   const imageWrapper = createWrapperForComponent('image-container', 'div');
   imageWrapper.appendChild(createImgElementPeopleMode(image));

@@ -1,4 +1,4 @@
-.main-guiz-game {
+.main-quiz-game {
   max-height: 70%;
   width: 100%;
   display: grid;
@@ -12,7 +12,7 @@
   column-gap: 6rem;
 }
 
-.main-guiz-game .image-container {
+.main-quiz-game .image-container {
   grid-area: img;
   align-self: center;
   height: 100%;
@@ -20,7 +20,7 @@
   position: relative;
 }
 
-.main-guiz-game .game-mode-container {
+.main-quiz-game .game-mode-container {
   grid-area: game-mode;
 }
 
