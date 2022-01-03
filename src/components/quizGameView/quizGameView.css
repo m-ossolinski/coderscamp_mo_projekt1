@@ -38,10 +38,10 @@
     grid-template-columns: 1fr;
     grid-template-rows: 6fr 1fr 4fr 2fr;
     grid-template-areas:
-    'img'
-    'game-mode'
-    'answers-cards'
-    'timer';
+      'img'
+      'game-mode'
+      'answers-cards'
+      'timer';
     margin-top: 3rem;
   }
 }

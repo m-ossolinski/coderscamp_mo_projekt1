@@ -5,7 +5,9 @@ export const showGamePanel = async () => {
   const startGamePanel = document.querySelector('.main-game-panel');
   const spinner = document.querySelector('.sk-circle');
 
-  startGamePanel.remove();
+  if (startGamePanel) {
+    startGamePanel.remove();
+  }
   spinner.classList.remove('hide');
 
   const spinnerVisibilityTime = 1500;

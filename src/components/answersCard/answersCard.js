@@ -1,7 +1,12 @@
 import './answersCard.css';
 import isAnswerCorrect from '../../services/game/isAnswerCorrect';
+import { showGamePanel } from '../../services/game/showGamePanel';
 
-export function createAnswersCards(possibleAnswers, correctAnswer, savePlayerAnswers) {
+export function createAnswersCards(
+  possibleAnswers,
+  correctAnswer,
+  savePlayerAnswers
+) {
   if (!Array.isArray(possibleAnswers))
     throw new Error('possibleAnswers array is not an array');
   if (possibleAnswers.length === 0)
@@ -32,9 +37,20 @@ export function createAnswersCards(possibleAnswers, correctAnswer, savePlayerAns
       if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
         button.classList.add('answer__button--correct');
         savePlayerAnswers(selectedAnswer, true);
+
+        setTimeout(() => {
+          const prevGameView = document.querySelector('.main-quiz-game');
+          prevGameView.remove();
+          showGamePanel();
+        }, 1500);
       } else {
         button.classList.add('answer__button--wrong');
         savePlayerAnswers(selectedAnswer, false);
+        setTimeout(() => {
+          const prevGameView = document.querySelector('.main-quiz-game');
+          prevGameView.remove();
+          showGamePanel();
+        }, 1500);
       }
     });
   });
