@@ -1,62 +1,5 @@
 import './modalWindowContent.css';
 
-/* EXAMPLE DATA
-
-const answersList = [
-  {
-    id: 1,
-    img: '../../../static/assets/img/modes/people/13.jpg',
-    correctAnswer: 'Chewbacca',
-    human: {
-      answer: 'Chewbacca',
-      isCorrect: true
-    },
-    autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
-    }
-  },
-  {
-    id: 2,
-    img: '../../../static/assets/img/modes/people/7.jpg',
-    correctAnswer: 'Beru Whitesun lars',
-    human: {
-      answer: 'Beru Whitesun lars',
-      isCorrect: true
-    },
-    autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
-    }
-  },
-  {
-    id: 3,
-    img: '../../../static/assets/img/modes/people/19.jpg',
-    correctAnswer: 'Jek Tono Porkins',
-    human: {
-      answer: 'Chewbacca',
-      isCorrect: false
-    },
-    autoPlayer: {
-      answer: 'Jek Tono Porkins',
-      isCorrect: true
-    }
-  },
-  {
-    id: 4,
-    img: '../../../static/assets/img/modes/people/26.jpg',
-    correctAnswer: 'Lobot',
-    human: {
-      answer: 'Lobot',
-      isCorrect: true
-    },
-    autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
-    }
-  }
-]; */
-
 const hideModalVisibility = () => {
   const modal = document.querySelector('.content');
   modal.classList.add('hidden');
@@ -216,7 +159,7 @@ const createSubmitButton = () => {
   return submitBtn;
 };
 
-const handleSaveUserResult = (e, saveScore) => {
+const handleSaveUserResult = (e, saveScore, answersList, gameMode) => {
   e.preventDefault();
   const input = document.querySelector('.form_name-input');
   const playerName = input.value;
@@ -224,7 +167,7 @@ const handleSaveUserResult = (e, saveScore) => {
     showWarning();
   } else {
     const score = countCorrectAnswers(answersList, 'human').length;
-    saveScore(playerName, score);
+    saveScore(playerName, score, gameMode);
     input.value = '';
     setTimeout(() => {
       hideModalVisibility();
@@ -232,10 +175,9 @@ const handleSaveUserResult = (e, saveScore) => {
   }
 };
 
-export const gameResultsModal = (saveScore) => {
+export const gameResultsModal = (saveScore, gameMode) => {
   const game = localStorage.getItem('Game');
   const answersList = JSON.parse(game);
-  console.log(answersList);
 
   const content = document.createElement('div');
   content.classList.add('content');
@@ -271,8 +213,8 @@ export const gameResultsModal = (saveScore) => {
   const warning = createWarning();
 
   const submitBtn = createSubmitButton();
-  submitBtn.addEventListener('click', (e) =>
-    handleSaveUserResult(e, saveScore)
+  submitBtn.addEventListener('click', (e, gameMode) =>
+    handleSaveUserResult(e, saveScore, answersList, gameMode)
   );
 
   form.appendChild(warning);

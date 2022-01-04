@@ -5,8 +5,9 @@ import { convertTimeToSeconds } from '../../utils/helpers/convertTimeToSeconds';
 import { modal } from '../modalWindow/modal';
 import { gameResultsModal } from '../../components/modalWindowContent/modalWindowContent';
 import { Game } from '../../services/game/game';
+import { saveFinalScore } from '../../services/rank/saveFinalScore';
 
-export function Timer() {
+export function Timer(gameMode) {
   let minutes = 1;
   let seconds = 30;
   let allSeconds = convertTimeToSeconds(minutes, seconds);
@@ -32,7 +33,7 @@ export function Timer() {
       seconds = 59;
     }
     if (minutes === 0 && seconds === 0) {
-      modal(gameResultsModal());
+      modal(gameResultsModal(saveFinalScore, gameMode));
       clearInterval(intervalId);
       intervalId = null;
       const timer = document.querySelector('.timerArea');

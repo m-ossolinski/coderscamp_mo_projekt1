@@ -28,7 +28,7 @@ export class Rank {
     localStorage.setItem('rank', JSON.stringify(this.rank));
   }
 
-  getRank(currentMode) {
-    return this.rank[currentMode];
+  getRank(gameMode) {
+    return this.rank[gameMode];
   }
 }

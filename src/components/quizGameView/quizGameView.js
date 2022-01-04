@@ -77,7 +77,7 @@ export async function createQuizGameView(gameMode = 'people') {
   );
 
   const timerContainer = createWrapperForComponent('timer-container', 'div');
-  timerContainer.appendChild(Timer());
+  timerContainer.appendChild(Timer(gameMode));
 
   questionsArea.appendChild(imageWrapper);
   questionsArea.appendChild(gameModeWrapper);
