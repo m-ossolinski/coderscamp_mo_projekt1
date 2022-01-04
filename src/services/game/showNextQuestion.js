@@ -77,8 +77,7 @@ export const showNextQuestion = async (gameMode) => {
   questionsArea.appendChild(answersCardsWrapper);
 
   setTimeout(async () => {
-    /* do rozwiazania - ten komponent musi byc dodany jako pierwsze dziecko */
-    quizGameView.appendChild(questionsArea);
+    quizGameView.prepend(questionsArea);
     spinner.classList.add('hide');
   }, spinnerVisibilityTime);
 };
