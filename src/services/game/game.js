@@ -1,5 +1,3 @@
-export default class Game {
-  constructor(selectedMode = 'people') {
-    this.selectedMode = selectedMode;
-  }
-}
+export const saveGame = () => {
+  localStorage.setItem('Game', []);
+};

@@ -5,6 +5,7 @@ import {
   getGameModeQuestion
 } from '../../components/gameMode/gameMode';
 import { createAnswersCards } from '../../components/answersCard/answersCard';
+import { saveNextAnswer } from '../player/player';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -48,14 +49,18 @@ export const showNextQuestion = async (gameMode) => {
     'div'
   );
 
+  const questionSaved = {
+    img: image,
+    correctAnswer: rightAnswer
+  };
+
   answersCardsWrapper.appendChild(
     createAnswersCards(
       answers,
       rightAnswer,
-      () => {
-        console.log('click');
-      },
-      gameMode
+      saveNextAnswer,
+      gameMode,
+      questionSaved
     )
   );
 

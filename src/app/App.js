@@ -6,4 +6,5 @@ export const App = async ({ options }) => {
 
   swquiz.appendChild(spinner());
   swquiz.appendChild(await createMainView());
+  localStorage.clear('Game');
 };

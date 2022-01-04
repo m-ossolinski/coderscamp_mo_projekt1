@@ -7,6 +7,7 @@ import {
 import { createAnswersCards } from '../answersCard/answersCard';
 import { Timer } from '../Timer/Timer';
 import generateQuestionForTheGameMode from '../../services/game/generateQuestions';
+import { saveAnswer } from '../../services/player/player';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -48,14 +49,22 @@ export async function createQuizGameView(gameMode = 'people') {
     'div'
   );
 
+  const questionSaved = {
+    id: 1,
+    img: image,
+    correctAnswer: rightAnswer
+  };
+
+  const game = [];
+  localStorage.setItem('Game', JSON.stringify(game));
+
   answersCardsWrapper.appendChild(
     createAnswersCards(
       answers,
       rightAnswer,
-      () => {
-        console.log('click');
-      },
-      gameMode
+      saveAnswer,
+      gameMode,
+      questionSaved
     )
   );
 

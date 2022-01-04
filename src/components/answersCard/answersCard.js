@@ -6,7 +6,8 @@ export function createAnswersCards(
   possibleAnswers,
   correctAnswer,
   savePlayerAnswers,
-  gameMode
+  gameMode,
+  questionSaved
 ) {
   if (!Array.isArray(possibleAnswers))
     throw new Error('possibleAnswers array is not an array');
@@ -37,7 +38,7 @@ export function createAnswersCards(
 
       if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
         button.classList.add('answer__button--correct');
-        savePlayerAnswers(selectedAnswer, true);
+        savePlayerAnswers(selectedAnswer, true, questionSaved);
 
         setTimeout(() => {
           const prevGameView = document.querySelector('.main-questions-area');
@@ -46,7 +47,7 @@ export function createAnswersCards(
         }, 500);
       } else {
         button.classList.add('answer__button--wrong');
-        savePlayerAnswers(selectedAnswer, false);
+        savePlayerAnswers(selectedAnswer, false, questionSaved);
         setTimeout(() => {
           const prevGameView = document.querySelector('.main-questions-area');
           prevGameView.remove();
