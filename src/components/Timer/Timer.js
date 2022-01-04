@@ -87,11 +87,13 @@ export function Timer() {
       minutes -= 1;
       seconds = 59;
     }
-    /*if (minutes === 0 && seconds === 0) {
+    if (minutes === 0 && seconds === 0) {
       modal(gameResultsModal(answersList, 10));
       clearInterval(intervalId);
       intervalId = null;
-    }*/
+      const timer = document.querySelector('.timerArea');
+      timer.remove();
+    }
   }, 1000);
 
   return timerArea;
