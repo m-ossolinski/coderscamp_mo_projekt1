@@ -88,7 +88,7 @@ function prepareMainData(imgData, gameMode, answer) {
           containerNodeName: 'div'
         },
         {
-          component: redButton('Play the game', showGamePanel),
+          component: redButton('Play the game', showGamePanel, gameMode),
           containerClassName: 'btn-container',
           containerNodeName: 'div'
         }

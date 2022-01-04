@@ -5,7 +5,8 @@ import { showNextQuestion } from '../../services/game/showNextQuestion';
 export function createAnswersCards(
   possibleAnswers,
   correctAnswer,
-  savePlayerAnswers
+  savePlayerAnswers,
+  gameMode
 ) {
   if (!Array.isArray(possibleAnswers))
     throw new Error('possibleAnswers array is not an array');
@@ -41,7 +42,7 @@ export function createAnswersCards(
         setTimeout(() => {
           const prevGameView = document.querySelector('.main-questions-area');
           prevGameView.remove();
-          showNextQuestion();
+          showNextQuestion(gameMode);
         }, 500);
       } else {
         button.classList.add('answer__button--wrong');
@@ -49,7 +50,7 @@ export function createAnswersCards(
         setTimeout(() => {
           const prevGameView = document.querySelector('.main-questions-area');
           prevGameView.remove();
-          showNextQuestion();
+          showNextQuestion(gameMode);
         }, 500);
       }
     });

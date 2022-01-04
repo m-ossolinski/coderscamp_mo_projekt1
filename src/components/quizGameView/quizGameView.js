@@ -49,9 +49,14 @@ export async function createQuizGameView(gameMode = 'people') {
   );
 
   answersCardsWrapper.appendChild(
-    createAnswersCards(answers, rightAnswer, () => {
-      console.log('click');
-    })
+    createAnswersCards(
+      answers,
+      rightAnswer,
+      () => {
+        console.log('click');
+      },
+      gameMode
+    )
   );
 
   const timerContainer = createWrapperForComponent('timer-container', 'div');

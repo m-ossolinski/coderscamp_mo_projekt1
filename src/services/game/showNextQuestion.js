@@ -22,15 +22,13 @@ function createWrapperForComponent(className, nodeName) {
   return componentWrapper;
 }
 
-export const showNextQuestion = async () => {
-  console.log('next question');
-
+export const showNextQuestion = async (gameMode) => {
   const quizGameView = document.querySelector('.main-quiz-game');
   const spinner = document.querySelector('.sk-circle');
   spinner.classList.remove('hide');
   const spinnerVisibilityTime = 1500;
 
-  const question = await generateQuestionForTheGameMode('people');
+  const question = await generateQuestionForTheGameMode(gameMode);
   const { answers, rightAnswer, image } = question;
 
   const questionsArea = document.createElement('div');
@@ -43,7 +41,7 @@ export const showNextQuestion = async () => {
     'game-mode-container',
     'div'
   );
-  gameModeWrapper.appendChild(createGameMode(getGameModeQuestion('people')));
+  gameModeWrapper.appendChild(createGameMode(getGameModeQuestion(gameMode)));
 
   const answersCardsWrapper = createWrapperForComponent(
     'answers-card-container',
@@ -51,9 +49,14 @@ export const showNextQuestion = async () => {
   );
 
   answersCardsWrapper.appendChild(
-    createAnswersCards(answers, rightAnswer, () => {
-      console.log('click');
-    })
+    createAnswersCards(
+      answers,
+      rightAnswer,
+      () => {
+        console.log('click');
+      },
+      gameMode
+    )
   );
 
   questionsArea.appendChild(imageWrapper);
