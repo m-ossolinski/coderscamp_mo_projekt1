@@ -31,6 +31,9 @@ export async function createQuizGameView(gameMode = 'people') {
   const quizGameView = document.createElement('main');
   quizGameView.classList.add('main-quiz-game');
 
+  const questionsArea = document.createElement('div');
+  questionsArea.classList.add('main-questions-area');
+
   const imageWrapper = createWrapperForComponent('image-container', 'div');
   imageWrapper.appendChild(createImgElementPeopleMode(image));
 
@@ -54,9 +57,10 @@ export async function createQuizGameView(gameMode = 'people') {
   const timerContainer = createWrapperForComponent('timer-container', 'div');
   timerContainer.appendChild(Timer());
 
-  quizGameView.appendChild(imageWrapper);
-  quizGameView.appendChild(gameModeWrapper);
-  quizGameView.appendChild(answersCardsWrapper);
+  questionsArea.appendChild(imageWrapper);
+  questionsArea.appendChild(gameModeWrapper);
+  questionsArea.appendChild(answersCardsWrapper);
+  quizGameView.appendChild(questionsArea);
   quizGameView.appendChild(timerContainer);
 
   return quizGameView;

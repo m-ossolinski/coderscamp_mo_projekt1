@@ -42,7 +42,7 @@ export function createAnswersCards(
           const prevGameView = document.querySelector('.main-quiz-game');
           prevGameView.remove();
           showGamePanel();
-        }, 1500);
+        }, 500);
       } else {
         button.classList.add('answer__button--wrong');
         savePlayerAnswers(selectedAnswer, false);
@@ -50,7 +50,7 @@ export function createAnswersCards(
           const prevGameView = document.querySelector('.main-quiz-game');
           prevGameView.remove();
           showGamePanel();
-        }, 1500);
+        }, 500);
       }
     });
   });
