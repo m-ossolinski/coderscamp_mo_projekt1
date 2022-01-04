@@ -91,7 +91,7 @@ const getFinishGameString = (answersList) => {
   const questionsNumber = answersList.length;
 
   const human = countCorrectAnswers(answersList, 'human').length;
-  const autoPlayer = countCorrectAnswers(answersList, 'autoPlayer').length;
+  const autoPlayer = countCorrectAnswers(answersList, 'human').length; // tylko do testow powinno byc 'autoPlayer'
 
   const text = setFinishGameString(
     setYodaQuoteString(human, autoPlayer),
@@ -155,13 +155,13 @@ const displayResultsTable = (answersList) => {
   answersList.forEach((answer) => {
     const markup = `
         <tr>
-          <td> <img src="${answer.img}" class="resultsTable_img"/> </td>
+          <td> <img src="${atob(answer.img)}" class="resultsTable_img"/> </td>
           <td class="resultsTable_answer--${
             answer.human.isCorrect ? 'correct' : 'incorrect'
           }"> ${answer.human.answer} </td>
           <td class="resultsTable_answer--${
-            answer.autoPlayer.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.autoPlayer.answer} </td>
+            answer.human.isCorrect ? 'correct' : 'incorrect'
+          }"> ${answer.human.answer} </td>
           <td class="resultsTable_answer--default"> ${
             answer.correctAnswer
           } </td>
@@ -232,7 +232,11 @@ const handleSaveUserResult = (e, saveScore) => {
   }
 };
 
-export const gameResultsModal = (answersList, saveScore) => {
+export const gameResultsModal = (saveScore) => {
+  const game = localStorage.getItem('Game');
+  const answersList = JSON.parse(game);
+  console.log(answersList);
+
   const content = document.createElement('div');
   content.classList.add('content');
 
