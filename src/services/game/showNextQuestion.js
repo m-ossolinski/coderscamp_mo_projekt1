@@ -6,6 +6,7 @@ import {
 } from '../../components/gameMode/gameMode';
 import { createAnswersCards } from '../../components/answersCard/answersCard';
 import { saveNextAnswer } from '../player/player';
+import { getAutoPlayer } from '../player/autoPlayer';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -49,9 +50,16 @@ export const showNextQuestion = async (gameMode) => {
     'div'
   );
 
+  const computer = getAutoPlayer();
+  const autoPlayer = computer.getAnswer(image, answers);
+
   const questionSaved = {
     img: image,
-    correctAnswer: rightAnswer
+    correctAnswer: rightAnswer,
+    autoPlayer: {
+      answer: autoPlayer,
+      isCorrect: autoPlayer === rightAnswer ? true : false
+    }
   };
 
   answersCardsWrapper.appendChild(

@@ -8,6 +8,7 @@ import { createAnswersCards } from '../answersCard/answersCard';
 import { Timer } from '../Timer/Timer';
 import generateQuestionForTheGameMode from '../../services/game/generateQuestions';
 import { saveAnswer } from '../../services/player/player';
+import { getAutoPlayer } from '../../services/player/autoPlayer';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -49,10 +50,17 @@ export async function createQuizGameView(gameMode = 'people') {
     'div'
   );
 
+  const computer = getAutoPlayer();
+  const autoPlayer = computer.getAnswer(image, answers);
+
   const questionSaved = {
     id: 1,
     img: image,
-    correctAnswer: rightAnswer
+    correctAnswer: rightAnswer,
+    autoPlayer: {
+      answer: autoPlayer,
+      isCorrect: autoPlayer === rightAnswer ? true : false
+    }
   };
 
   const game = [];

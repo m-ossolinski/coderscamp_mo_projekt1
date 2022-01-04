@@ -91,7 +91,7 @@ const getFinishGameString = (answersList) => {
   const questionsNumber = answersList.length;
 
   const human = countCorrectAnswers(answersList, 'human').length;
-  const autoPlayer = countCorrectAnswers(answersList, 'human').length; // tylko do testow powinno byc 'autoPlayer'
+  const autoPlayer = countCorrectAnswers(answersList, 'autoPlayer').length;
 
   const text = setFinishGameString(
     setYodaQuoteString(human, autoPlayer),
@@ -158,9 +158,9 @@ const displayResultsTable = (answersList) => {
           <td> <img src="${atob(answer.img)}" class="resultsTable_img"/> </td>
           <td class="resultsTable_answer--${
             answer.human.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.human.answer} </td>
+          }"> ${answer.autoPlayer.answer} </td> 
           <td class="resultsTable_answer--${
-            answer.human.isCorrect ? 'correct' : 'incorrect'
+            answer.autoPlayer.isCorrect ? 'correct' : 'incorrect'
           }"> ${answer.human.answer} </td>
           <td class="resultsTable_answer--default"> ${
             answer.correctAnswer
