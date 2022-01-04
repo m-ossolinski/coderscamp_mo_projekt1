@@ -1,6 +1,7 @@
 import './ranking.css';
+import { Rank } from '../../services/rank/rank';
 
-const getRankingTable = (playersRankingData) => {
+const getRankingTable = () => {
   const rankingTableContent = document.createElement('table');
   rankingTableContent.classList.add('ranking_content');
 
@@ -22,6 +23,12 @@ const getRankingTable = (playersRankingData) => {
 
   const contentTableBody = document.createElement('tbody');
   contentTableBody.classList.add('content_body');
+
+  const playerRank = new Rank();
+
+  const playersRankingData = playerRank.getRank('people');
+
+  /* problem playersRankingData is a read only when trying to compare playersRankingData to something, cannot display fake data */
 
   if (playersRankingData === undefined || playersRankingData === '') {
     playersRankingData = [
