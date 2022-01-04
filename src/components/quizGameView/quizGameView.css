@@ -43,6 +43,7 @@
 .timer-container {
   grid-area: timer;
   height: 10%;
+  justify-self: flex-end;
 }
 
 @media screen and (max-width: 1000px) {

@@ -1,6 +1,6 @@
 import './answersCard.css';
 import isAnswerCorrect from '../../services/game/isAnswerCorrect';
-import { showGamePanel } from '../../services/game/showGamePanel';
+import { showNextQuestion } from '../../services/game/showNextQuestion';
 
 export function createAnswersCards(
   possibleAnswers,
@@ -39,17 +39,17 @@ export function createAnswersCards(
         savePlayerAnswers(selectedAnswer, true);
 
         setTimeout(() => {
-          const prevGameView = document.querySelector('.main-quiz-game');
+          const prevGameView = document.querySelector('.main-questions-area');
           prevGameView.remove();
-          showGamePanel();
+          showNextQuestion();
         }, 500);
       } else {
         button.classList.add('answer__button--wrong');
         savePlayerAnswers(selectedAnswer, false);
         setTimeout(() => {
-          const prevGameView = document.querySelector('.main-quiz-game');
+          const prevGameView = document.querySelector('.main-questions-area');
           prevGameView.remove();
-          showGamePanel();
+          showNextQuestion();
         }, 500);
       }
     });
