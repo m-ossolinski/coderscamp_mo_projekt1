@@ -1,23 +1,31 @@
 .main-quiz-game {
-  height: 80%;
+  height: 70%;
+  max-height: 70%;
   padding: 2rem 0;
   display: flex;
-  flex-direction: column;
-  justify-items: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.main-quiz-game > * {
+  flex-basis: 100%;
 }
 
 .main-questions-area {
   grid-area: questions;
-  height: 80%;
+  height: 70%;
+  min-height: 70%;
+  max-height: 70%;
   width: 100%;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 1fr 3fr;
   grid-template-rows: 1fr 7fr;
   grid-template-areas:
     'img game-mode'
     'img answers-cards';
   margin-bottom: 3rem;
-  grid-gap: 2rem;
+  column-gap: 4rem;
+  row-gap: 2rem;
   justify-content: center;
   justify-items: center;
 }
@@ -31,29 +39,41 @@
 }
 
 .main-questions-area .game-mode-container {
-  width: 90%;
+  width: 100%;
   grid-area: game-mode;
 }
 
 .answers-card-container {
-  width: 90%;
+  width: 100%;
   grid-area: answers-cards;
 }
 
 .timer-container {
   grid-area: timer;
-  height: 10%;
-  justify-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .main-questions-area {
+    grid-template-columns: 3fr 7fr;
+  }
 }
 
 @media screen and (max-width: 1000px) {
   .main-questions-area {
     grid-area: questions;
-    height: 100%;
+    height: 80%;
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
     align-items: center;
+  }
+  .timer-container {
+    position: static;
+    align-self: flex-end;
   }
 }

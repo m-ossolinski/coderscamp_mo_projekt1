@@ -78,6 +78,12 @@
   grid-area: btn-red;
 }
 
+@media screen and (max-width: 1500px) {
+  .main-game-panel {
+    grid-template-columns: 3fr 3fr 3fr;
+  }
+}
+
 @media screen and (max-width: 1300px) {
   .main-view {
     padding: 3rem 0;
@@ -99,17 +105,17 @@
   .main-game-panel {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 10% 1fr 10% 10%;
+    grid-template-rows: repeat(5, auto);
     grid-template-areas:
       'img'
       'game-mode'
       'game-rules'
       'btn-white'
       'btn-red';
-    row-gap: 1rem;
+    row-gap: 1.5rem;
     column-gap: 1rem;
     padding: 1rem;
-    justify-items: center;
+    align-items: center;
   }
 }
 
@@ -118,7 +124,11 @@
     width: 300px;
   }
 
-  .main {
-    grid-template-rows: 1fr 10% 1fr 5% 5%;
+  .main-view  {
+    width: 100%;
+  }
+
+  .main-game-panel {
+     grid-template-rows: repeat(5, auto);
   }
 }

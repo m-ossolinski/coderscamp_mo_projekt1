@@ -7,6 +7,7 @@ import {
 import { createAnswersCards } from '../../components/answersCard/answersCard';
 import { saveNextAnswer } from '../player/player';
 import { getAutoPlayer } from '../player/autoPlayer';
+import { changeGameModeText } from './changeGameModeText';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -28,7 +29,7 @@ export const showNextQuestion = async (gameMode) => {
   const quizGameView = document.querySelector('.main-quiz-game');
   const spinner = document.querySelector('.sk-circle');
   spinner.classList.remove('hide');
-  const spinnerVisibilityTime = 1500;
+  const spinnerVisibilityTime = 200;
 
   const question = await generateQuestionForTheGameMode(gameMode);
   const { answers, rightAnswer, image } = question;
@@ -51,7 +52,10 @@ export const showNextQuestion = async (gameMode) => {
   );
 
   const computer = getAutoPlayer();
-  const autoPlayer = computer.getAnswer(image, answers);
+  let autoPlayer;
+  if (answers.length === 4) {
+    autoPlayer = computer.getAnswer(image, answers);
+  }
 
   const questionSaved = {
     img: image,
@@ -79,5 +83,6 @@ export const showNextQuestion = async (gameMode) => {
   setTimeout(async () => {
     quizGameView.prepend(questionsArea);
     spinner.classList.add('hide');
+    changeGameModeText();
   }, spinnerVisibilityTime);
 };

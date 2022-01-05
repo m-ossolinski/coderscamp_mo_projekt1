@@ -1,4 +1,7 @@
 import './modalWindowContent.css';
+import { closeQuizGamePanel } from '../quizGameView/quizGameView';
+import { createGamePanel } from '../mainView/mainView';
+import { async } from 'regenerator-runtime';
 
 const hideModalVisibility = () => {
   const modal = document.querySelector('.content');
@@ -101,7 +104,7 @@ const displayResultsTable = (answersList) => {
           <td> <img src="${atob(answer.img)}" class="resultsTable_img"/> </td>
           <td class="resultsTable_answer--${
             answer.human.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.autoPlayer.answer} </td> 
+          }"> ${answer.autoPlayer.answer} </td>
           <td class="resultsTable_answer--${
             answer.autoPlayer.isCorrect ? 'correct' : 'incorrect'
           }"> ${answer.human.answer} </td>
@@ -219,9 +222,12 @@ export const gameResultsModal = (saveScore, gameMode) => {
   const warning = createWarning();
 
   const submitBtn = createSubmitButton();
-  submitBtn.addEventListener('click', (e) =>
-    handleSaveUserResult(e, saveScore, answersList, gameMode)
-  );
+  submitBtn.addEventListener('click', async (e) => {
+    handleSaveUserResult(e, saveScore, answersList, gameMode);
+    closeQuizGamePanel();
+    const mainView = document.querySelector('.main-view');
+    mainView.appendChild(await createGamePanel());
+  });
 
   form.appendChild(warning);
   form.appendChild(nameInput);

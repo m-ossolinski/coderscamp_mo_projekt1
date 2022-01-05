@@ -26,6 +26,11 @@ function createWrapperForComponent(className, nodeName) {
   return componentWrapper;
 }
 
+export function closeQuizGamePanel() {
+  const quizGamePanel = document.querySelector('.main-quiz-game');
+  quizGamePanel.remove();
+}
+
 export async function createQuizGameView(gameMode = 'people') {
   const question = await generateQuestionForTheGameMode(gameMode);
   const { answers, rightAnswer, image } = question;

@@ -13,3 +13,9 @@
     margin: 0 auto;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .swq_recognitionimg-people {
+    width: 100%;
+  }
+}

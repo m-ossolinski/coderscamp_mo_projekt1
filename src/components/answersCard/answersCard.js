@@ -1,6 +1,30 @@
 import './answersCard.css';
 import isAnswerCorrect from '../../services/game/isAnswerCorrect';
 import { showNextQuestion } from '../../services/game/showNextQuestion';
+import { throttle } from '../../utils/helpers/throttle';
+
+function answersCardsEventHandler(button, correctAnswer, gameMode, questionSaved, savePlayerAnswers) {
+  const selectedAnswer = button.textContent;
+
+  if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
+    button.classList.add('answer__button--correct');
+    savePlayerAnswers(selectedAnswer, true, questionSaved);
+
+    setTimeout(() => {
+      const prevGameView = document.querySelector('.main-questions-area');
+      prevGameView.remove();
+      showNextQuestion(gameMode);
+    }, 500);
+  } else {
+    button.classList.add('answer__button--wrong');
+    savePlayerAnswers(selectedAnswer, false, questionSaved);
+    setTimeout(() => {
+      const prevGameView = document.querySelector('.main-questions-area');
+      prevGameView.remove();
+      showNextQuestion(gameMode);
+    }, 500);
+  }
+}
 
 export function createAnswersCards(
   possibleAnswers,
@@ -33,28 +57,7 @@ export function createAnswersCards(
     button.appendChild(label);
     answersCardsComponent.appendChild(button);
 
-    button.addEventListener('click', () => {
-      const selectedAnswer = button.textContent;
-
-      if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
-        button.classList.add('answer__button--correct');
-        savePlayerAnswers(selectedAnswer, true, questionSaved);
-
-        setTimeout(() => {
-          const prevGameView = document.querySelector('.main-questions-area');
-          prevGameView.remove();
-          showNextQuestion(gameMode);
-        }, 500);
-      } else {
-        button.classList.add('answer__button--wrong');
-        savePlayerAnswers(selectedAnswer, false, questionSaved);
-        setTimeout(() => {
-          const prevGameView = document.querySelector('.main-questions-area');
-          prevGameView.remove();
-          showNextQuestion(gameMode);
-        }, 500);
-      }
-    });
+    button.addEventListener('click', throttle(() => answersCardsEventHandler(button, correctAnswer, gameMode, questionSaved, savePlayerAnswers), 1000));
   });
 
   return answersCardsComponent;
