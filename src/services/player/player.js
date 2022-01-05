@@ -1,26 +1,28 @@
-import generateQuestionForTheGameMode from '../game/generateQuestions';
+export const saveAnswer = (selectedAnswer, isCorrect, questionSaved) => {
+  const game = localStorage.getItem('Game');
+  const parsedGame = JSON.parse(game);
 
-export default class Player {
-    constructor() {
-        this.playerName;
-        this.points = 0;
-        this.id = Date.now();
-        this.question = [];
-        this.answers = [];
-        this.correctAnswers = [];
-    }
+  const human = {
+    answer: selectedAnswer,
+    isCorrect: isCorrect
+  };
+  questionSaved.human = human;
 
-    save() {
-        localStorage.setItem('playerName', this.playerName);
-        localStorage.setItem('points', this.points);
-    }
+  parsedGame.push(questionSaved);
+  localStorage.setItem('Game', JSON.stringify(parsedGame));
+};
 
-    getQuestion(gameMode) {
-        const {answers, rightAnswer: correctAnswers, image} = generateQuestionForTheGameMode(gameMode);
+export const saveNextAnswer = (selectedAnswer, isCorrect, questionSaved) => {
+  const game = localStorage.getItem('Game');
+  const parsedGame = JSON.parse(game);
 
-        this.question.push(gameMode);
-        this.answers.push({ answers, image });
-        this.correctAnswers.push(correctAnswers);
-    }
+  const human = {
+    answer: selectedAnswer,
+    isCorrect: isCorrect
+  };
+  questionSaved.human = human;
+  questionSaved.id = parsedGame.length + 1;
 
-}
+  parsedGame.push(questionSaved);
+  localStorage.setItem('Game', JSON.stringify(parsedGame));
+};

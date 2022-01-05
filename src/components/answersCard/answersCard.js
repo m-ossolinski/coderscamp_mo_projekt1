@@ -1,7 +1,14 @@
 import './answersCard.css';
 import isAnswerCorrect from '../../services/game/isAnswerCorrect';
+import { showNextQuestion } from '../../services/game/showNextQuestion';
 
-export function createAnswersCards(possibleAnswers, correctAnswer, savePlayerAnswers) {
+export function createAnswersCards(
+  possibleAnswers,
+  correctAnswer,
+  savePlayerAnswers,
+  gameMode,
+  questionSaved
+) {
   if (!Array.isArray(possibleAnswers))
     throw new Error('possibleAnswers array is not an array');
   if (possibleAnswers.length === 0)
@@ -31,10 +38,21 @@ export function createAnswersCards(possibleAnswers, correctAnswer, savePlayerAns
 
       if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
         button.classList.add('answer__button--correct');
-        savePlayerAnswers(selectedAnswer, true);
+        savePlayerAnswers(selectedAnswer, true, questionSaved);
+
+        setTimeout(() => {
+          const prevGameView = document.querySelector('.main-questions-area');
+          prevGameView.remove();
+          showNextQuestion(gameMode);
+        }, 500);
       } else {
         button.classList.add('answer__button--wrong');
-        savePlayerAnswers(selectedAnswer, false);
+        savePlayerAnswers(selectedAnswer, false, questionSaved);
+        setTimeout(() => {
+          const prevGameView = document.querySelector('.main-questions-area');
+          prevGameView.remove();
+          showNextQuestion(gameMode);
+        }, 500);
       }
     });
   });

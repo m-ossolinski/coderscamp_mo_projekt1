@@ -1,62 +1,5 @@
 import './modalWindowContent.css';
 
-/* EXAMPLE DATA
-
-const answersList = [
-  {
-    id: 1,
-    img: '../../../static/assets/img/modes/people/13.jpg',
-    correctAnswer: 'Chewbacca',
-    human: {
-      answer: 'Chewbacca',
-      isCorrect: true
-    },
-    autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
-    }
-  },
-  {
-    id: 2,
-    img: '../../../static/assets/img/modes/people/7.jpg',
-    correctAnswer: 'Beru Whitesun lars',
-    human: {
-      answer: 'Beru Whitesun lars',
-      isCorrect: true
-    },
-    autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
-    }
-  },
-  {
-    id: 3,
-    img: '../../../static/assets/img/modes/people/19.jpg',
-    correctAnswer: 'Jek Tono Porkins',
-    human: {
-      answer: 'Chewbacca',
-      isCorrect: false
-    },
-    autoPlayer: {
-      answer: 'Jek Tono Porkins',
-      isCorrect: true
-    }
-  },
-  {
-    id: 4,
-    img: '../../../static/assets/img/modes/people/26.jpg',
-    correctAnswer: 'Lobot',
-    human: {
-      answer: 'Lobot',
-      isCorrect: true
-    },
-    autoPlayer: {
-      answer: 'Darth Vader',
-      isCorrect: false
-    }
-  }
-]; */
-
 const hideModalVisibility = () => {
   const modal = document.querySelector('.content');
   modal.classList.add('hidden');
@@ -155,13 +98,13 @@ const displayResultsTable = (answersList) => {
   answersList.forEach((answer) => {
     const markup = `
         <tr>
-          <td> <img src="${answer.img}" class="resultsTable_img"/> </td>
+          <td> <img src="${atob(answer.img)}" class="resultsTable_img"/> </td>
           <td class="resultsTable_answer--${
             answer.human.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.human.answer} </td>
+          }"> ${answer.autoPlayer.answer} </td> 
           <td class="resultsTable_answer--${
             answer.autoPlayer.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.autoPlayer.answer} </td>
+          }"> ${answer.human.answer} </td>
           <td class="resultsTable_answer--default"> ${
             answer.correctAnswer
           } </td>
@@ -216,7 +159,7 @@ const createSubmitButton = () => {
   return submitBtn;
 };
 
-const handleSaveUserResult = (e, saveScore) => {
+const handleSaveUserResult = (e, saveScore, answersList, gameMode) => {
   e.preventDefault();
   const input = document.querySelector('.form_name-input');
   const playerName = input.value;
@@ -224,15 +167,24 @@ const handleSaveUserResult = (e, saveScore) => {
     showWarning();
   } else {
     const score = countCorrectAnswers(answersList, 'human').length;
-    saveScore(playerName, score);
+    saveScore(playerName, score, gameMode, answersList);
     input.value = '';
     setTimeout(() => {
       hideModalVisibility();
+      const backdrop = document.getElementById('backdrop');
+      const modalWrapper = document.getElementById('modal');
+      setTimeout(() => {
+        backdrop.remove();
+        modalWrapper.remove();
+      }, 500);
     }, 1000);
   }
 };
 
-export const gameResultsModal = (answersList, saveScore) => {
+export const gameResultsModal = (saveScore, gameMode) => {
+  const game = localStorage.getItem('Game');
+  const answersList = JSON.parse(game);
+
   const content = document.createElement('div');
   content.classList.add('content');
 
@@ -268,7 +220,7 @@ export const gameResultsModal = (answersList, saveScore) => {
 
   const submitBtn = createSubmitButton();
   submitBtn.addEventListener('click', (e) =>
-    handleSaveUserResult(e, saveScore)
+    handleSaveUserResult(e, saveScore, answersList, gameMode)
   );
 
   form.appendChild(warning);

@@ -1,14 +1,12 @@
-import './quizGameView.css';
-import createImgElementPeopleMode from '../recognitionImg/ImgModePeople/ImgModePeople';
+import generateQuestionForTheGameMode from '../../services/game/generateQuestions';
+import createImgElementPeopleMode from '../../components/recognitionImg/ImgModePeople/ImgModePeople';
 import {
   gameMode as createGameMode,
   getGameModeQuestion
-} from '../gameMode/gameMode';
-import { createAnswersCards } from '../answersCard/answersCard';
-import { Timer } from '../Timer/Timer';
-import generateQuestionForTheGameMode from '../../services/game/generateQuestions';
-import { saveAnswer } from '../../services/player/player';
-import { getAutoPlayer } from '../../services/player/autoPlayer';
+} from '../../components/gameMode/gameMode';
+import { createAnswersCards } from '../../components/answersCard/answersCard';
+import { saveNextAnswer } from '../player/player';
+import { getAutoPlayer } from '../player/autoPlayer';
 
 function createWrapperForComponent(className, nodeName) {
   if (typeof className !== 'string' && className.length < 2)
@@ -26,12 +24,14 @@ function createWrapperForComponent(className, nodeName) {
   return componentWrapper;
 }
 
-export async function createQuizGameView(gameMode = 'people') {
+export const showNextQuestion = async (gameMode) => {
+  const quizGameView = document.querySelector('.main-quiz-game');
+  const spinner = document.querySelector('.sk-circle');
+  spinner.classList.remove('hide');
+  const spinnerVisibilityTime = 1500;
+
   const question = await generateQuestionForTheGameMode(gameMode);
   const { answers, rightAnswer, image } = question;
-
-  const quizGameView = document.createElement('main');
-  quizGameView.classList.add('main-quiz-game');
 
   const questionsArea = document.createElement('div');
   questionsArea.classList.add('main-questions-area');
@@ -54,7 +54,6 @@ export async function createQuizGameView(gameMode = 'people') {
   const autoPlayer = computer.getAnswer(image, answers);
 
   const questionSaved = {
-    id: 1,
     img: image,
     correctAnswer: rightAnswer,
     autoPlayer: {
@@ -63,27 +62,22 @@ export async function createQuizGameView(gameMode = 'people') {
     }
   };
 
-  const game = [];
-  localStorage.setItem('Game', JSON.stringify(game));
-
   answersCardsWrapper.appendChild(
     createAnswersCards(
       answers,
       rightAnswer,
-      saveAnswer,
+      saveNextAnswer,
       gameMode,
       questionSaved
     )
   );
 
-  const timerContainer = createWrapperForComponent('timer-container', 'div');
-  timerContainer.appendChild(Timer(gameMode));
-
   questionsArea.appendChild(imageWrapper);
   questionsArea.appendChild(gameModeWrapper);
   questionsArea.appendChild(answersCardsWrapper);
-  quizGameView.appendChild(questionsArea);
-  quizGameView.appendChild(timerContainer);
 
-  return quizGameView;
-}
+  setTimeout(async () => {
+    quizGameView.prepend(questionsArea);
+    spinner.classList.add('hide');
+  }, spinnerVisibilityTime);
+};

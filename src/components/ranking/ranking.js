@@ -1,6 +1,7 @@
 import './ranking.css';
+import { setRank } from '../../services/rank/rank';
 
-const getRankingTable = (playersRankingData) => {
+const getRankingTable = (gameMode) => {
   const rankingTableContent = document.createElement('table');
   rankingTableContent.classList.add('ranking_content');
 
@@ -23,29 +24,39 @@ const getRankingTable = (playersRankingData) => {
   const contentTableBody = document.createElement('tbody');
   contentTableBody.classList.add('content_body');
 
-  if (playersRankingData === undefined || playersRankingData === '') {
-    playersRankingData = [
-      { player: 'That can be you', answers: 20, questions: 20 }
-    ];
-  }
-  playersRankingData.forEach((player, index) => {
-    const markup = `
+  let playersRankingData = setRank();
+
+  if (playersRankingData === null) {
+    let rank = localStorage.getItem('rank');
+    rank = JSON.parse(rank);
+    rank['people'].push({
+      playerName: 'That can be you',
+      score: 20,
+      questions: 20
+    });
+    localStorage.setItem('rank', JSON.stringify(rank));
+  } else {
+    playersRankingData[gameMode].forEach((player, index) => {
+      const markup = `
     <tr> 
       <td class="content_body-row"> ${index + 1}${
-      index + 1 === 1 ? 'st' : 'nd'
-    } </td>
-      <td class="content_body-row"> ${player.player} </td>
-      <td class="content_body-row content_body-row--last"> ${
-        player.answers
-      } / ${player.questions} </td>
+        index + 1 === 1 ? 'st' : 'nd'
+      } </td>
+      <td class="content_body-row"> ${player.playerName} </td>
+      <td class="content_body-row content_body-row--last"> ${player.score} / ${
+        player.questions
+      } </td>
     </tr>`;
-    rankingTableContent.insertAdjacentHTML('beforeend', markup);
-  });
+      rankingTableContent.insertAdjacentHTML('beforeend', markup);
+    });
+
+    return rankingTableContent;
+  }
 
   return rankingTableContent;
 };
 
-export const getRanking = (playersRankingData) => {
+export const getRanking = (gameMode) => {
   const rankingWrapper = document.createElement('div');
   rankingWrapper.classList.add('ranking');
 
@@ -64,7 +75,7 @@ export const getRanking = (playersRankingData) => {
   rankingTitle.appendChild(rankingTitleText);
 
   rankingWrapper.appendChild(rankingTitle);
-  const ranking = getRankingTable(playersRankingData);
+  const ranking = getRankingTable(gameMode);
   rankingWrapper.appendChild(ranking);
 
   return rankingWrapper;

@@ -1,18 +1,28 @@
 .main-quiz-game {
-  max-height: 70%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 6fr;
-  grid-template-rows: 1fr 7fr 2fr;
-  grid-template-areas:
-    'img game-mode'
-    'img answers-cards'
-    'timer timer';
-  row-gap: 4rem;
-  column-gap: 6rem;
+  height: 80%;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
 }
 
-.main-quiz-game .image-container {
+.main-questions-area {
+  grid-area: questions;
+  height: 80%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 1fr 7fr;
+  grid-template-areas:
+    'img game-mode'
+    'img answers-cards';
+  margin-bottom: 3rem;
+  grid-gap: 2rem;
+  justify-content: center;
+  justify-items: center;
+}
+
+.main-questions-area .image-container {
   grid-area: img;
   align-self: center;
   height: 100%;
@@ -20,28 +30,30 @@
   position: relative;
 }
 
-.main-quiz-game .game-mode-container {
+.main-questions-area .game-mode-container {
+  width: 90%;
   grid-area: game-mode;
 }
 
 .answers-card-container {
+  width: 90%;
   grid-area: answers-cards;
 }
 
 .timer-container {
   grid-area: timer;
-  align-self: end;
+  height: 10%;
+  justify-self: flex-end;
 }
 
 @media screen and (max-width: 1000px) {
-  .main-guiz-game {
-    grid-template-columns: 1fr;
-    grid-template-rows: 6fr 1fr 4fr 2fr;
-    grid-template-areas:
-    'img'
-    'game-mode'
-    'answers-cards'
-    'timer';
-    margin-top: 3rem;
+  .main-questions-area {
+    grid-area: questions;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    align-items: center;
   }
 }
