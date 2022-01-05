@@ -28,7 +28,7 @@ export const showNextQuestion = async (gameMode) => {
   const quizGameView = document.querySelector('.main-quiz-game');
   const spinner = document.querySelector('.sk-circle');
   spinner.classList.remove('hide');
-  const spinnerVisibilityTime = 1500;
+  const spinnerVisibilityTime = 200;
 
   const question = await generateQuestionForTheGameMode(gameMode);
   const { answers, rightAnswer, image } = question;

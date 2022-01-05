@@ -4,7 +4,6 @@ import { LightsaberTimer } from '../LightsaberTimer/LightsaberTimer';
 import { convertTimeToSeconds } from '../../utils/helpers/convertTimeToSeconds';
 import { modal } from '../modalWindow/modal';
 import { gameResultsModal } from '../../components/modalWindowContent/modalWindowContent';
-import { Game } from '../../services/game/game';
 import { saveFinalScore } from '../../services/rank/saveFinalScore';
 
 export function Timer(gameMode) {

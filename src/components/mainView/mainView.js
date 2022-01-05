@@ -152,7 +152,7 @@ function getComponentsForMain(componentsData) {
   return componentsForMain[0];
 }
 
-export const createGamePanel = async (mode) => {
+export const createGamePanel = async (mode = 'people') => {
   const question = await generateQuestionForTheGameMode(mode);
 
   const mainComponents = getComponentsForMain(
