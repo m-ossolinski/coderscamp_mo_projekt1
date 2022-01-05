@@ -161,7 +161,6 @@ const createSubmitButton = () => {
 
 const handleSaveUserResult = (e, saveScore, answersList, gameMode) => {
   e.preventDefault();
-  console.log(`handleSaveUserResult: ${gameMode}`);
   const input = document.querySelector('.form_name-input');
   const playerName = input.value;
   if (playerName === '') {
@@ -172,6 +171,12 @@ const handleSaveUserResult = (e, saveScore, answersList, gameMode) => {
     input.value = '';
     setTimeout(() => {
       hideModalVisibility();
+      const backdrop = document.getElementById('backdrop');
+      const modalWrapper = document.getElementById('modal');
+      setTimeout(() => {
+        backdrop.remove();
+        modalWrapper.remove();
+      }, 500);
     }, 1000);
   }
 };

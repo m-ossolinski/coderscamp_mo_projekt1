@@ -7,7 +7,5 @@ export const saveFinalScore = (playerName, score, gameMode, answersList) => {
     questions: answersList.length
   };
 
-  console.log(`saveFinalScore: ${gameMode}`);
-
   saveToRank(gameMode, player);
 };
