@@ -1,4 +1,4 @@
-export function throttle(callback, delay = 500) {
+export function throttle(callback, delay = 1000) {
   if(typeof callback !== 'function') throw new Error(
     'An error occurred while invoke function throttle: argument fn have to be a function'
   )
@@ -8,10 +8,12 @@ export function throttle(callback, delay = 500) {
   let lastClickTime = 0;
   return (...args) => {
     const currentClickTime = new Date().getTime();
+
     if(currentClickTime - lastClickTime < delay) {
       return;
     }
+
     lastClickTime = currentClickTime;
-    callback(...args);
+    return callback(...args);
   }
 }
