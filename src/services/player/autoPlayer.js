@@ -1,4 +1,3 @@
-// export default
 class AutoPlayer {
   constructor() {
     this.id = 'AutoPlayer';
@@ -10,9 +9,7 @@ class AutoPlayer {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  getAnswer(image, answers) {
-    // console.log(image);
-    // console.log(answers);
+  async getAnswer(image, answers) {
     if (typeof image !== 'string') {
       throw new Error('An error occurred while generating answer: type of image is not a string');
     }
@@ -23,7 +20,6 @@ class AutoPlayer {
       throw new Error('An error occurred while generating answer: answers array is expected to contain 4 answers');
     }
     const autoPlayerAnswerIndex = this.generateAutoPlayerAnswer(0, 3);
-    // console.log(autoPlayerAnswerIndex);
     const autoPlayerAnswer = answers[autoPlayerAnswerIndex];
 
     return autoPlayerAnswer;
