@@ -1,34 +1,34 @@
-export class Rank {
-  constructor() {
-    this.rank = localStorage.getItem('rank');
-    if (!this.rank) {
-      this.rank = {
+export const setRank = () => {
+  let rank = localStorage.getItem('rank');
+  if (rank === null) {
+    localStorage.setItem(
+      'rank',
+      JSON.stringify({
         people: [],
         vehicles: [],
-        spaceships: []
-      };
-    } else {
-      this.rank = JSON.parse(this.rank);
-    }
-  }
-
-  addToRank(currentMode, player) {
-    const index = this.rank[currentMode].indexOf(
-      (item) => item.id === player.id
+        starships: []
+      })
     );
-    if (index === -1) {
-      this.rank[currentMode].push(player);
-    } else {
-      this.rank[currentMode][index] = player;
-    }
-
-    this.rank[currentMode] = this.rank[currentMode].sort(
-      (a, b) => a.points - b.points
-    );
-    localStorage.setItem('rank', JSON.stringify(this.rank));
+    localStorage.getItem('rank');
+    rank = JSON.parse(rank);
+    return rank;
+  } else {
+    rank = JSON.parse(rank);
+    return rank;
   }
+};
 
-  getRank(gameMode) {
-    return this.rank[gameMode];
-  }
-}
+export const saveToRank = (gameMode, player) => {
+  let rank = localStorage.getItem('rank');
+  rank = JSON.parse(rank);
+  rank[gameMode].push(player);
+  const sortedRank = rank[gameMode].sort((a, b) => a.score > b.score);
+  rank[gameMode] = sortedRank;
+  localStorage.setItem('rank', JSON.stringify(rank));
+};
+
+export const getRank = (gameMode) => {
+  let rank = localStorage.getItem('rank');
+  rank = JSON.parse(rank);
+  rank = rank[gameMode];
+};

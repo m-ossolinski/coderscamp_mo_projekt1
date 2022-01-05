@@ -161,13 +161,14 @@ const createSubmitButton = () => {
 
 const handleSaveUserResult = (e, saveScore, answersList, gameMode) => {
   e.preventDefault();
+  console.log(`handleSaveUserResult: ${gameMode}`);
   const input = document.querySelector('.form_name-input');
   const playerName = input.value;
   if (playerName === '') {
     showWarning();
   } else {
     const score = countCorrectAnswers(answersList, 'human').length;
-    saveScore(playerName, score, gameMode);
+    saveScore(playerName, score, gameMode, answersList);
     input.value = '';
     setTimeout(() => {
       hideModalVisibility();
@@ -213,7 +214,7 @@ export const gameResultsModal = (saveScore, gameMode) => {
   const warning = createWarning();
 
   const submitBtn = createSubmitButton();
-  submitBtn.addEventListener('click', (e, gameMode) =>
+  submitBtn.addEventListener('click', (e) =>
     handleSaveUserResult(e, saveScore, answersList, gameMode)
   );
 

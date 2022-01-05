@@ -1,7 +1,7 @@
 import './ranking.css';
-import { Rank } from '../../services/rank/rank';
+import { setRank } from '../../services/rank/rank';
 
-const getRankingTable = () => {
+const getRankingTable = (gameMode) => {
   const rankingTableContent = document.createElement('table');
   rankingTableContent.classList.add('ranking_content');
 
@@ -24,35 +24,39 @@ const getRankingTable = () => {
   const contentTableBody = document.createElement('tbody');
   contentTableBody.classList.add('content_body');
 
-  const playerRank = new Rank();
+  let playersRankingData = setRank();
 
-  const playersRankingData = playerRank.getRank('people');
-
-  /* problem playersRankingData is a read only when trying to compare playersRankingData to something, cannot display fake data */
-
-  if (playersRankingData === undefined || playersRankingData === '') {
-    playersRankingData = [
-      { player: 'That can be you', answers: 20, questions: 20 }
-    ];
-  }
-  playersRankingData.forEach((player, index) => {
-    const markup = `
+  if (playersRankingData === null) {
+    let rank = localStorage.getItem('rank');
+    rank = JSON.parse(rank);
+    rank['people'].push({
+      playerName: 'That can be you',
+      score: 20,
+      questions: 20
+    });
+    localStorage.setItem('rank', JSON.stringify(rank));
+  } else {
+    playersRankingData[gameMode].forEach((player, index) => {
+      const markup = `
     <tr> 
       <td class="content_body-row"> ${index + 1}${
-      index + 1 === 1 ? 'st' : 'nd'
-    } </td>
-      <td class="content_body-row"> ${player.player} </td>
-      <td class="content_body-row content_body-row--last"> ${
-        player.answers
-      } / ${player.questions} </td>
+        index + 1 === 1 ? 'st' : 'nd'
+      } </td>
+      <td class="content_body-row"> ${player.playerName} </td>
+      <td class="content_body-row content_body-row--last"> ${player.score} / ${
+        player.questions
+      } </td>
     </tr>`;
-    rankingTableContent.insertAdjacentHTML('beforeend', markup);
-  });
+      rankingTableContent.insertAdjacentHTML('beforeend', markup);
+    });
+
+    return rankingTableContent;
+  }
 
   return rankingTableContent;
 };
 
-export const getRanking = (playersRankingData) => {
+export const getRanking = (gameMode) => {
   const rankingWrapper = document.createElement('div');
   rankingWrapper.classList.add('ranking');
 
@@ -71,7 +75,7 @@ export const getRanking = (playersRankingData) => {
   rankingTitle.appendChild(rankingTitleText);
 
   rankingWrapper.appendChild(rankingTitle);
-  const ranking = getRankingTable(playersRankingData);
+  const ranking = getRankingTable(gameMode);
   rankingWrapper.appendChild(ranking);
 
   return rankingWrapper;

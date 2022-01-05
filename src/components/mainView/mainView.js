@@ -69,7 +69,7 @@ function prepareMainData(imgData, gameMode, answer) {
           containerNodeName: 'div'
         },
         {
-          component: getRanking(),
+          component: getRanking(gameMode),
           containerClassName: 'ranking-container',
           containerNodeName: 'div'
         },

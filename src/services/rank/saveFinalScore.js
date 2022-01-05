@@ -1,11 +1,13 @@
-import { Rank } from './rank';
+import { saveToRank } from './rank';
 
-export const saveFinalScore = (playerName, score, gameMode) => {
+export const saveFinalScore = (playerName, score, gameMode, answersList) => {
   const player = {
     playerName: playerName,
-    score: score
+    score: score,
+    questions: answersList.length
   };
 
-  const playerRank = new Rank();
-  playerRank.addToRank(gameMode, player);
+  console.log(`saveFinalScore: ${gameMode}`);
+
+  saveToRank(gameMode, player);
 };
