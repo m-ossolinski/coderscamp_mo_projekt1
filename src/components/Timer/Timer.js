@@ -37,6 +37,7 @@ export function Timer(gameMode) {
       intervalId = null;
       const timer = document.querySelector('.timerArea');
       timer.remove();
+      localStorage.removeItem('Game');
     }
   }, 1000);
 
