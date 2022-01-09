@@ -10,6 +10,7 @@ const getRandomNumber = (minInt, maxInt) => {
 
 const getRangeOfIds = async (gameMode) => {
   const ids = await fetchIdsFromAPI(gameMode);
+  console.log(ids);
   let result = ids;
   if (gameMode === 'starships') {
     result = ids.filter(
@@ -23,10 +24,10 @@ const getRangeOfIds = async (gameMode) => {
 };
 
 const generateAnswerNumbers = (arrOfNumbers) => {
-  const minIndex = 1;
+  const minIndex = 0;
   const answerNumbers = [];
   for (let i = 0; answerNumbers.length <= 3; i++) {
-    const index = getRandomNumber(minIndex, arrOfNumbers.length);
+    const index = getRandomNumber(minIndex, arrOfNumbers.length - 1);
     const rand = arrOfNumbers[index];
     if (!answerNumbers.includes(rand)) {
       answerNumbers.push(rand);

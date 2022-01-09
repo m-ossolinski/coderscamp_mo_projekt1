@@ -33,6 +33,7 @@ export const showNextQuestion = async (gameMode) => {
 
   const question = await generateQuestionForTheGameMode(gameMode);
   const { answers, rightAnswer, image } = question;
+  console.log(answers);
 
   const questionsArea = document.createElement('div');
   questionsArea.classList.add('main-questions-area');
