@@ -1,6 +1,6 @@
 export const setRank = () => {
-  let rank = localStorage.getItem('rank');
-  if (rank === null) {
+  if (localStorage.getItem('rank') === null) {
+    console.log('rank was null');
     localStorage.setItem(
       'rank',
       JSON.stringify({
@@ -9,21 +9,25 @@ export const setRank = () => {
         starships: []
       })
     );
-    localStorage.getItem('rank');
-    rank = JSON.parse(rank);
-    return rank;
+    const rank = localStorage.getItem('rank');
+    const rankParsed = JSON.parse(rank);
+    return rankParsed;
   } else {
-    rank = JSON.parse(rank);
-    return rank;
+    console.log('rank parsed');
+    const rank = localStorage.getItem('rank');
+    const rankParsed = JSON.parse(rank);
+    return rankParsed;
   }
 };
 
 export const saveToRank = (gameMode, player) => {
   let rank = localStorage.getItem('rank');
   rank = JSON.parse(rank);
+  console.log(rank);
   rank[gameMode].push(player);
   const sortedRank = rank[gameMode].sort((a, b) => a.score > b.score);
   rank[gameMode] = sortedRank;
+  console.log(sortedRank);
   localStorage.setItem('rank', JSON.stringify(rank));
 };
 

@@ -26,7 +26,9 @@ const getRankingTable = (gameMode) => {
 
   let playersRankingData = setRank();
 
-  if (playersRankingData === null) {
+  console.log(playersRankingData[gameMode].length);
+
+  if (playersRankingData[gameMode].length === 0) {
     let rank = localStorage.getItem('rank');
     rank = JSON.parse(rank);
     rank['people'].push({
@@ -35,6 +37,21 @@ const getRankingTable = (gameMode) => {
       questions: 20
     });
     localStorage.setItem('rank', JSON.stringify(rank));
+    rank = localStorage.getItem('rank');
+    const rankParsed = JSON.parse(rank);
+    rankParsed[gameMode].forEach((player, index) => {
+      const markup = `
+    <tr> 
+      <td class="content_body-row"> ${index + 1}${
+        index + 1 === 1 ? 'st' : 'nd'
+      } </td>
+      <td class="content_body-row"> ${player.playerName} </td>
+      <td class="content_body-row content_body-row--last"> ${player.score} / ${
+        player.questions
+      } </td>
+    </tr>`;
+      rankingTableContent.insertAdjacentHTML('beforeend', markup);
+    });
   } else {
     playersRankingData[gameMode].forEach((player, index) => {
       const markup = `
