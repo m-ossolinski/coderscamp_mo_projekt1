@@ -52,10 +52,7 @@ export const showNextQuestion = async (gameMode) => {
   );
 
   const computer = getAutoPlayer();
-  let autoPlayer;
-  if (answers.length === 4) {
-    autoPlayer = computer.getAnswer(image, answers);
-  }
+  const autoPlayer = await computer.getAnswer(image, answers);
 
   const questionSaved = {
     img: image,
