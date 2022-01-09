@@ -104,10 +104,10 @@ const displayResultsTable = (answersList) => {
           <td> <img src="${atob(answer.img)}" class="resultsTable_img"/> </td>
           <td class="resultsTable_answer--${
             answer.human.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.autoPlayer.answer} </td>
+          }"> ${answer.human.answer} </td>
           <td class="resultsTable_answer--${
             answer.autoPlayer.isCorrect ? 'correct' : 'incorrect'
-          }"> ${answer.human.answer} </td>
+          }"> ${answer.autoPlayer.answer} </td>
           <td class="resultsTable_answer--default"> ${
             answer.correctAnswer
           } </td>
