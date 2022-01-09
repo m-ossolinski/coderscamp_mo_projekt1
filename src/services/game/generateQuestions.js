@@ -23,10 +23,10 @@ const getRangeOfIds = async (gameMode) => {
 };
 
 const generateAnswerNumbers = (arrOfNumbers) => {
-  const minIndex = 0;
+  const minIndex = 1;
   const answerNumbers = [];
   for (let i = 0; answerNumbers.length <= 3; i++) {
-    const index = getRandomNumber(minIndex, arrOfNumbers.length - 1);
+    const index = getRandomNumber(minIndex, arrOfNumbers.length);
     const rand = arrOfNumbers[index];
     if (!answerNumbers.includes(rand)) {
       answerNumbers.push(rand);
