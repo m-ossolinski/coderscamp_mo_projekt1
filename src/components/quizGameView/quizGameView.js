@@ -56,7 +56,7 @@ export async function createQuizGameView(gameMode = 'people') {
   );
 
   const computer = getAutoPlayer();
-  const autoPlayer = await computer.getAnswer(image, answers);
+  const autoPlayer = computer.getAnswer(image, answers);
 
   const questionSaved = {
     id: 1,
