@@ -10,7 +10,6 @@ const getRandomNumber = (minInt, maxInt) => {
 
 const getRangeOfIds = async (gameMode) => {
   const ids = await fetchIdsFromAPI(gameMode);
-  console.log(ids);
   let result = ids;
   if (gameMode === 'starships') {
     result = ids.filter(

@@ -22,3 +22,8 @@
   background-color: rgba(0, 0, 0, 0.8);
   display: block;
 }
+
+.hidden {
+  transform: scaleY(0);
+  transition: transform 400ms ease 0ms;
+}
