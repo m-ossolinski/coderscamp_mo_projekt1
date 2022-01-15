@@ -11,13 +11,19 @@ class AutoPlayer {
 
   async getAnswer(image, answers) {
     if (typeof image !== 'string') {
-      throw new Error('An error occurred while generating answer: type of image is not a string');
+      throw new Error(
+        'An error occurred while generating answer: type of image is not a string'
+      );
     }
     if (!Array.isArray(answers)) {
-      throw new Error('An error occurred while generating answer: answers is not an array');
+      throw new Error(
+        'An error occurred while generating answer: answers is not an array'
+      );
     }
     if (answers.length !== 4) {
-      throw new Error('An error occurred while generating answer: answers array is expected to contain 4 answers');
+      /*throw new Error('An error occurred while generating answer: answers array is expected to contain 4 answers');*/
+      console.log('answers less than 4');
+      console.log(answers);
     }
     const autoPlayerAnswerIndex = this.generateAutoPlayerAnswer(0, 3);
     const autoPlayerAnswer = answers[autoPlayerAnswerIndex];

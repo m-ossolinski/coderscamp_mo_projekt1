@@ -1,6 +1,9 @@
 export const setRank = () => {
-  let rank = localStorage.getItem('rank');
-  if (rank === null) {
+  if (localStorage.getItem('rank') !== null) {
+    const rank = localStorage.getItem('rank');
+    const rankParsed = JSON.parse(rank);
+    return rankParsed;
+  } else {
     localStorage.setItem(
       'rank',
       JSON.stringify({
@@ -9,12 +12,9 @@ export const setRank = () => {
         starships: []
       })
     );
-    localStorage.getItem('rank');
-    rank = JSON.parse(rank);
-    return rank;
-  } else {
-    rank = JSON.parse(rank);
-    return rank;
+    const rank = localStorage.getItem('rank');
+    const rankParsed = JSON.parse(rank);
+    return rankParsed;
   }
 };
 

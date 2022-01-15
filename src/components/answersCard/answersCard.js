@@ -3,7 +3,13 @@ import isAnswerCorrect from '../../services/game/isAnswerCorrect';
 import { showNextQuestion } from '../../services/game/showNextQuestion';
 import { throttle } from '../../utils/helpers/throttle';
 
-function answersCardsEventHandler(button, correctAnswer, gameMode, questionSaved, savePlayerAnswers) {
+function answersCardsEventHandler(
+  button,
+  correctAnswer,
+  gameMode,
+  questionSaved,
+  savePlayerAnswers
+) {
   const selectedAnswer = button.textContent;
 
   if (isAnswerCorrect(correctAnswer, selectedAnswer)) {
@@ -57,7 +63,20 @@ export function createAnswersCards(
     button.appendChild(label);
     answersCardsComponent.appendChild(button);
 
-    button.addEventListener('click', throttle(() => answersCardsEventHandler(button, correctAnswer, gameMode, questionSaved, savePlayerAnswers), 1000));
+    button.addEventListener(
+      'click',
+      throttle(
+        () =>
+          answersCardsEventHandler(
+            button,
+            correctAnswer,
+            gameMode,
+            questionSaved,
+            savePlayerAnswers
+          ),
+        1000
+      )
+    );
   });
 
   return answersCardsComponent;
