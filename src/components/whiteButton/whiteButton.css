@@ -1,0 +1,41 @@
+.btnWhite {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+  padding: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.btnWhite span {
+  font-weight: 500;
+  font-size: 3.5rem;
+}
+
+.btnWhite img {
+  width: 4rem;
+  height: auto;
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+  .btnWhite img {
+    width: 3rem;
+    height: auto;
+  }
+
+  .btnWhite span {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .btnWhite span {
+    font-size: 2rem;
+  }
+}

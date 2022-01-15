@@ -339,7 +339,7 @@
       "image": "yoda.jpg"
     },
     "model": "resources.people",
-    "pk": 0
+    "pk": 20
   },
   {
     "fields": {
@@ -1473,6 +1473,6 @@
       "image": "tion_medon.jpg"
     },
     "model": "resources.people",
-    "pk": 20
+    "pk": 83
   }
 ]
